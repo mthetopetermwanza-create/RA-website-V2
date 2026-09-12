@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reflexologists Association (RA) — Responsible reflexology and community wellbeing in Dzaleka Refugee Camp, Malawi.">
+  <title>Reflexologists Association | Responsible Practice · Community Wellbeing</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ra: {50:'#f0f5fa',100:'#e0ebf5',200:'#c1d7eb',500:'#1a4a7a',600:'#163f68',700:'#123456',800:'#0e2a45',900:'#0a1f33'},
+            sage: {50:'#eef7f2',500:'#2d6a4f',600:'#245a42'},
+            ink: {50:'#fafafa',100:'#f4f4f5',200:'#e4e4e7',300:'#d4d4d8',400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b'}
+          },
+          fontFamily: { sans: ['Inter','system-ui','-apple-system','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { -webkit-font-smoothing: antialiased; font-family: Inter, system-ui, sans-serif; }
+    .nav-link { font-size: 0.875rem; font-weight: 500; color: #3f3f46; transition: color 0.15s; }
+    .nav-link:hover, .nav-link.active { color: #1a4a7a; }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.9375rem; border-radius: 9999px;
+      transition: all 0.2s cubic-bezier(0.25,0.1,0.25,1); letter-spacing: -0.01em;
+      border: none; cursor: pointer; text-decoration: none;
+    }
+    .btn-primary { background: #1a4a7a; color: #fff; padding: 0.875rem 1.75rem; }
+    .btn-primary:hover { background: #123456; transform: scale(1.02); }
+    .btn-secondary { background: transparent; color: #1a4a7a; padding: 0.875rem 1.75rem; border: 1.5px solid #c1d7eb; }
+    .btn-secondary:hover { background: #f0f5fa; border-color: #1a4a7a; }
+    .section-label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1a4a7a; }
+    input, textarea, select { transition: border-color 0.2s, box-shadow 0.2s; }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.12); }
+    ::selection { background: #c1d7eb; color: #0a1f33; }
+  </style>
+</head>
+<body class="bg-white text-ink-900 antialiased">
+
+  <!-- Nav -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2.5">
+        <img src="ra_logo_nav.png" alt="RA" class="h-9 w-9 object-contain" width="36" height="36">
+        <span class="text-[15px] font-semibold tracking-tight text-ink-900 hidden sm:block">Reflexologists Association</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#impact" class="nav-link">Impact</a>
+        <a href="#insights" class="nav-link">Insights</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn btn-primary text-sm py-2.5 px-5 hidden sm:inline-flex">Partner with us</a>
+        <button id="mobile-menu-btn" class="md:hidden p-2 -mr-2 text-ink-700" aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-ink-100">
+      <div class="px-6 py-5 space-y-1">
+        <a href="#about" class="block py-2.5 text-[15px] font-medium mobile-nav">About</a>
+        <a href="#work" class="block py-2.5 text-[15px] font-medium mobile-nav">Work</a>
+        <a href="#impact" class="block py-2.5 text-[15px] font-medium mobile-nav">Impact</a>
+        <a href="#insights" class="block py-2.5 text-[15px] font-medium mobile-nav">Insights</a>
+        <a href="#contact" class="block py-2.5 text-[15px] font-medium mobile-nav">Contact</a>
+        <a href="#contact" class="btn btn-primary mt-4 w-full mobile-nav">Partner with us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME / HERO -->
+  <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-ra-50 to-white"></div>
+    <div class="relative max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl">
+        <p class="section-label mb-5">Dzaleka Refugee Camp · Malawi</p>
+        <h1 class="text-4xl sm:text-5xl md:text-[3.25rem] font-semibold tracking-tight text-ink-950 leading-[1.1] mb-6">
+          Responsible reflexology.<br class="hidden sm:block"> Community wellbeing.
+        </h1>
+        <p class="text-lg md:text-xl text-ink-600 leading-relaxed max-w-xl mb-10">
+          We unite practitioners and advance reflexology as a complementary therapy — with a special focus on vulnerable and underserved communities.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#work" class="btn btn-primary">Explore our work</a>
+          <a href="#about" class="btn btn-secondary">About the Association</a>
+        </div>
+      </div>
+      <div class="mt-20 pt-10 border-t border-ink-100 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <p class="text-sm font-semibold text-ink-900 mb-1">Professional standards</p>
+          <p class="text-sm text-ink-500 leading-snug">Training, ethics & practitioner support</p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink-900 mb-1">Community services</p>
+          <p class="text-sm text-ink-500 leading-snug">Accessible care for vulnerable populations</p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink-900 mb-1">Women & youth</p>
+          <p class="text-sm text-ink-500 leading-snug">Skills, confidence & livelihood pathways</p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink-900 mb-1">Partnerships</p>
+          <p class="text-sm text-ink-500 leading-snug">Health, humanitarian & development allies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision band -->
+  <section class="py-16 md:py-20 bg-ra-800">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-4">Vision</p>
+      <p class="text-2xl md:text-3xl font-medium text-white tracking-tight leading-snug">
+        “To make reflexology an acclaimed complementary therapy.”
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-24 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-20">
+        <div class="lg:col-span-5">
+          <p class="section-label mb-4">Who we are</p>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-6">
+            A professional association rooted in community.
+          </h2>
+          <p class="text-ink-600 leading-relaxed mb-4">
+            Reflexologists Association is based in Dzaleka Refugee Camp. We provide oversight and support for practitioners while promoting reflexology as a valuable complementary therapy — especially for people affected by displacement and limited access to supportive services.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+          <div class="bg-ra-50 p-7 rounded-2xl border border-ra-100/60">
+            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Complementary, not alternative</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">We work alongside existing health and psychosocial services, with clear referral pathways when specialised care is required.</p>
+          </div>
+          <div class="bg-sage-50 p-7 rounded-2xl border border-sage-500/10">
+            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Community empowerment</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">Training builds skills and livelihood opportunities — particularly for vulnerable women — while expanding access to supportive care.</p>
+          </div>
+          <div class="bg-ink-50 p-7 rounded-2xl border border-ink-100 sm:col-span-2">
+            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Responsible practice</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">Every programme remains grounded in professional standards, ethical conduct, and the dignity of the people we serve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision Mission Purpose -->
+      <div class="space-y-6 mb-20">
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="bg-ra-800 text-white rounded-2xl p-8 md:p-10">
+            <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-4">Vision</p>
+            <p class="text-xl md:text-2xl font-medium tracking-tight leading-snug">To make reflexology an acclaimed complementary therapy.</p>
+          </div>
+          <div class="bg-ra-50 rounded-2xl p-8 md:p-10 lg:col-span-2 border border-ra-100/50">
+            <p class="section-label mb-4">Mission</p>
+            <p class="text-ink-700 leading-relaxed text-[15px]">To unify and advocate on behalf of reflexology therapists and to promote reflexology as a valuable complementary therapy through holistic support and natural healing processes for human wellbeing, using non-invasive touch therapy to stimulate specific reflex points and support physical, emotional and energetic balance.</p>
+          </div>
+        </div>
+        <div class="bg-ink-50 rounded-2xl p-8 md:p-10 border border-ink-100">
+          <p class="section-label mb-4">Purpose</p>
+          <p class="text-ink-700 leading-relaxed max-w-4xl text-[15px]">RA seeks to strengthen the professional identity and responsible practice of reflexology while increasing public awareness of its potential value as a complementary approach to wellbeing. The organisation also seeks to build partnerships and develop specialised programmes, including the Integrative Reflexology Center and allied psychosocial support initiatives for vulnerable populations.</p>
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div class="mb-20">
+        <div class="max-w-xl mb-10">
+          <p class="section-label mb-4">Core values</p>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950">What guides every decision</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-2xl overflow-hidden border border-ink-100">
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Professionalism</h3><p class="text-sm text-ink-500">Responsible, ethical and competent practice.</p></div>
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Compassion</h3><p class="text-sm text-ink-500">Dignity, empathy and respect in every interaction.</p></div>
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Openness</h3><p class="text-sm text-ink-500">Learning, dialogue, transparency and collaboration.</p></div>
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Diversity</h3><p class="text-sm text-ink-500">People of different backgrounds, experiences and abilities.</p></div>
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Inclusion</h3><p class="text-sm text-ink-500">Vulnerable and underserved people are not left behind.</p></div>
+          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Excellence</h3><p class="text-sm text-ink-500">Exemplary in service, learning, advocacy and engagement.</p></div>
+        </div>
+      </div>
+
+      <!-- Structure -->
+      <div>
+        <div class="max-w-xl mb-10">
+          <p class="section-label mb-4">Structure</p>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950">RA and the Integrative Reflexology Center</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="bg-ra-800 text-white rounded-2xl p-8">
+            <p class="text-ra-200 text-xs font-semibold tracking-wider uppercase mb-3">Parent organisation</p>
+            <h3 class="font-semibold text-lg mb-3">Reflexologists Association</h3>
+            <p class="text-ra-100 text-sm leading-relaxed">Institutional identity, governance, strategic direction and professional framework.</p>
+          </div>
+          <div class="bg-white border border-sage-500/15 rounded-2xl p-8">
+            <p class="text-sage-500 text-xs font-semibold tracking-wider uppercase mb-3">Strategic arm</p>
+            <h3 class="font-semibold text-lg text-ink-900 mb-3">Integrative Reflexology Center</h3>
+            <p class="text-ink-600 text-sm leading-relaxed">Practical platform through which RA implements programmes and community initiatives.</p>
+          </div>
+          <div class="bg-white border border-ink-100 rounded-2xl p-8">
+            <p class="text-ink-400 text-xs font-semibold tracking-wider uppercase mb-3">On the ground</p>
+            <h3 class="font-semibold text-lg text-ink-900 mb-3">Projects & initiatives</h3>
+            <p class="text-ink-600 text-sm leading-relaxed">Practical expressions of RA’s mission — services, training, empowerment and partnerships.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="py-24 md:py-28 bg-ink-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-14">
+        <p class="section-label mb-4">Our work</p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">From professional development to community wellbeing.</h2>
+        <p class="text-ink-600 leading-relaxed">RA’s work spans practitioner support, community services, training, empowerment and partnerships — with the Integrative Reflexology Center as our main delivery platform.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
+          <p class="text-xs font-semibold text-ra-500 mb-4">01</p>
+          <h3 class="text-lg font-semibold text-ink-900 mb-2">Professional Development</h3>
+          <p class="text-sm text-ink-500 leading-relaxed">Training, capacity building, practitioner support and the promotion of responsible, ethical practice.</p>
+        </article>
+        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
+          <p class="text-xs font-semibold text-ra-500 mb-4">02</p>
+          <h3 class="text-lg font-semibold text-ink-900 mb-2">Community Wellness</h3>
+          <p class="text-sm text-ink-500 leading-relaxed">Reflexology awareness, public sensitisation and supportive wellness activities closer to communities.</p>
+        </article>
+        <article class="p-8 rounded-2xl border border-sage-500/20 bg-sage-50">
+          <p class="text-xs font-semibold text-sage-500 mb-4">03</p>
+          <h3 class="text-lg font-semibold text-ink-900 mb-2">Integrative Reflexology Center</h3>
+          <p class="text-sm text-ink-500 leading-relaxed">Platform for training, services, knowledge development, research and community wellbeing.</p>
+        </article>
+        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
+          <p class="text-xs font-semibold text-ra-500 mb-4">04</p>
+          <h3 class="text-lg font-semibold text-ink-900 mb-2">Vulnerable Populations</h3>
+          <p class="text-sm text-ink-500 leading-relaxed">Support for people affected by displacement, poverty, trauma, violence and other forms of vulnerability.</p>
+        </article>
+        <article class="p-8 rounded-2xl border border-ink-100 bg-white md:col-span-2 lg:col-span-1">
+          <p class="text-xs font-semibold text-ra-500 mb-4">05</p>
+          <h3 class="text-lg font-semibold text-ink-900 mb-2">Partnership & Advocacy</h3>
+          <p class="text-sm text-ink-500 leading-relaxed">Collaboration with authorities, health professionals, organisations and reflexology networks.</p>
+        </article>
+      </div>
+
+      <!-- IRC -->
+      <div class="bg-white rounded-2xl border border-ink-100 p-8 md:p-12">
+        <div class="flex items-center gap-3 mb-5">
+          <img src="irc_logo.png" alt="IRC" class="h-11 w-11 object-contain">
+          <p class="section-label !mb-0">Strategic programmatic arm</p>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-ink-950 mb-4">Integrative Reflexology Center</h3>
+        <p class="text-ink-600 leading-relaxed max-w-2xl mb-8">The Center is how RA turns vision into action. It delivers community services, training, research and empowerment — remaining an integral part of the Association, not a separate organisation.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Community-Based Services</h4><p class="text-xs text-ink-500">Reflexology for vulnerable populations in accessible settings.</p></div>
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Training & Skills</h4><p class="text-xs text-ink-500">Capacity building for practitioners and community workers.</p></div>
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Research & Evidence</h4><p class="text-xs text-ink-500">Knowledge on reflexology and integrative wellbeing.</p></div>
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Women & Youth</h4><p class="text-xs text-ink-500">Skills, livelihoods and professional opportunities.</p></div>
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Volunteer & Collaboration</h4><p class="text-xs text-ink-500">International partners contributing expertise.</p></div>
+          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Outreach & Resources</h4><p class="text-xs text-ink-500">Partnerships with donors and institutions.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact" class="py-24 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-14">
+        <p class="section-label mb-4">Impact</p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Complementary care that strengthens communities.</h2>
+        <p class="text-ink-600 leading-relaxed">We measure success by responsible practice, expanded access to supportive wellbeing services, and the empowerment of people — especially women and vulnerable groups.</p>
+      </div>
+
+      <div class="bg-ra-800 text-white rounded-3xl p-10 md:p-14 mb-16">
+        <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-5">A message to partners and donors</p>
+        <p class="text-xl md:text-2xl font-medium tracking-tight leading-snug mb-6 max-w-2xl">Our approach does not seek to replace conventional medical or mental-health care.</p>
+        <p class="text-ra-100 leading-relaxed max-w-2xl">Rather, RA promotes reflexology as a complementary community-based practice that can work alongside existing health, psychosocial and humanitarian services, with appropriate safeguarding and referral pathways.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Accessible</h3><p class="text-sm text-ink-500">Modest equipment and infrastructure requirements.</p></div>
+        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Supportive</h3><p class="text-sm text-ink-500">Relaxation, compassionate connection and structured self-care.</p></div>
+        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Community-based</h3><p class="text-sm text-ink-500">Services brought closer through centres, groups and outreach.</p></div>
+        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Empowering</h3><p class="text-sm text-ink-500">Skills and livelihood opportunities, especially for women.</p></div>
+        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100 sm:col-span-2 lg:col-span-1"><h3 class="font-semibold text-ink-900 mb-2">Responsible</h3><p class="text-sm text-ink-500">Complementary care with clear referral pathways.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights" class="py-24 md:py-28 bg-ink-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-10">
+        <p class="section-label mb-4">Insights</p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Reflections on practice, community and complementary care.</h2>
+      </div>
+      <div class="max-w-xl bg-white border border-ink-100 rounded-2xl p-10 md:p-12 text-center mx-auto">
+        <h3 class="text-xl font-semibold tracking-tight text-ink-900 mb-3">Coming soon</h3>
+        <p class="text-ink-600 leading-relaxed mb-6">We are preparing the first series of articles on responsible practice, community-based complementary care, and lessons from working in refugee and underserved settings.</p>
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl mb-14">
+        <p class="section-label mb-4">Contact</p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Let’s start a conversation.</h2>
+        <p class="text-ink-600 leading-relaxed">Whether you are exploring partnership, seeking information, or have a question — we welcome your message.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-14 lg:gap-16">
+        <div class="lg:col-span-3">
+          <form id="contact-form" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="first-name" class="block text-sm font-medium text-ink-700 mb-1.5">First name</label>
+                <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Your first name">
+              </div>
+              <div>
+                <label for="last-name" class="block text-sm font-medium text-ink-700 mb-1.5">Last name</label>
+                <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Your last name">
+              </div>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-ink-700 mb-1.5">Email</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="you@organization.org">
+            </div>
+            <div>
+              <label for="organization" class="block text-sm font-medium text-ink-700 mb-1.5">Organisation <span class="text-ink-400 font-normal">(optional)</span></label>
+              <input type="text" id="organization" name="organization" class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Organisation or institution">
+            </div>
+            <div>
+              <label for="inquiry-type" class="block text-sm font-medium text-ink-700 mb-1.5">How can we help?</label>
+              <select id="inquiry-type" name="inquiry-type" class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]">
+                <option value="">Select an option</option>
+                <option value="partnership">Partnership / Collaboration</option>
+                <option value="funding">Funding / Support inquiry</option>
+                <option value="training">Training or professional development</option>
+                <option value="media">Media or information request</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-ink-700 mb-1.5">Message</label>
+              <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px] resize-y" placeholder="Tell us a bit about your interest or question..."></textarea>
+            </div>
+            <div class="pt-1">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto">Send message</button>
+            </div>
+            <p class="text-sm text-ink-400">We aim to respond within a few business days.</p>
+          </form>
+        </div>
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Email</p>
+            <a href="mailto:reflexologistsassociation@gmail.com" class="text-ra-600 font-medium hover:text-ra-800">reflexologistsassociation@gmail.com</a>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Telephone</p>
+            <p class="text-ink-700">+265 984 575 479</p>
+            <p class="text-ink-700">+265 990 388 543</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Location</p>
+            <p class="text-ink-600 text-sm leading-relaxed">Dzaleka Refugee Camp<br>New Katubza–Ubuntu Road<br>Dowa District, Central Region<br>Malawi</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Postal address</p>
+            <p class="text-ink-600 text-sm leading-relaxed">P.O. Box 16<br>Dowa District<br>Central Region, Malawi</p>
+          </div>
+          <div class="pt-6 border-t border-ink-100">
+            <p class="text-sm text-ink-500 leading-relaxed">RA welcomes collaboration with government authorities, health bodies, humanitarian partners, academic institutions, donors and individual supporters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-ra-800">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-5">Partner with us for healthier communities.</h2>
+      <p class="text-ra-100 mb-8 leading-relaxed">We welcome collaboration with government, health bodies, humanitarian partners, academic institutions and donors who share our commitment.</p>
+      <a href="#contact" class="btn bg-white text-ra-800 hover:bg-ra-50 px-8 py-3.5">Start a conversation</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-ink-950 text-ink-400 pt-16 pb-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-12 mb-14">
+        <div>
+          <div class="flex items-center gap-2.5 mb-5">
+            <img src="ra_logo_nav.png" alt="" class="h-8 w-8 object-contain brightness-0 invert opacity-90">
+            <span class="text-sm font-semibold text-white tracking-tight">Reflexologists Association</span>
+          </div>
+          <p class="text-sm leading-relaxed max-w-xs">Promoting responsible reflexology, professional unity and holistic community wellbeing.</p>
+          <p class="text-xs text-ink-500 mt-4"></p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold text-ink-300 uppercase tracking-wider mb-4">On this page</p>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#work" class="hover:text-white transition-colors">Our Work</a></li>
+            <li><a href="#impact" class="hover:text-white transition-colors">Impact</a></li>
+            <li><a href="#insights" class="hover:text-white transition-colors">Insights</a></li>
+            <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs font-semibold text-ink-300 uppercase tracking-wider mb-4">Contact</p>
+          <ul class="space-y-2.5 text-sm">
+            <li>Dzaleka Refugee Camp, Malawi</li>
+            <li><a href="mailto:reflexologistsassociation@gmail.com" class="hover:text-white transition-colors">reflexologistsassociation@gmail.com</a></li>
+            <li>+265 984 575 479</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-ink-800 pt-8 flex flex-col sm:flex-row justify-between gap-3 text-xs text-ink-500">
+        <p>© 2026 Reflexologists Association (RA)</p>
+        <p>Registered Trustees · Dzaleka Refugee Camp, Malawi</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.querySelectorAll('.mobile-nav').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+      btn.textContent = 'Message sent — thank you';
+      btn.disabled = true;
+      setTimeout(() => { btn.textContent = original; btn.disabled = false; e.target.reset(); }, 2800);
+    });
+  </script>
+</body>
+</html>
