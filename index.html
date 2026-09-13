@@ -49,6 +49,68 @@
     input, textarea, select { transition: border-color 0.2s, box-shadow 0.2s; }
     input:focus, textarea:focus, select:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.12); }
     ::selection { background: #c1d7eb; color: #0a1f33; }
+
+    /* Testimony modals */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(15, 15, 20, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.25rem;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .modal-overlay.is-open { opacity: 1; visibility: visible; }
+    .modal-panel {
+      background: #fff;
+      border-radius: 1.25rem;
+      max-width: 40rem;
+      width: 100%;
+      max-height: min(88vh, 42rem);
+      display: flex; flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .modal-overlay.is-open .modal-panel { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+      padding: 1.35rem 1.5rem 1rem;
+      border-bottom: 1px solid #e4e4e7;
+      flex-shrink: 0;
+    }
+    .modal-body {
+      padding: 1.25rem 1.5rem 1.75rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: #3f3f46;
+    }
+    .modal-body p { margin-bottom: 1rem; }
+    .modal-body p:last-child { margin-bottom: 0; }
+    .modal-close {
+      flex-shrink: 0;
+      width: 2.25rem; height: 2.25rem;
+      border-radius: 9999px;
+      border: 1px solid #e4e4e7;
+      background: #fafafa;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #52525b;
+      transition: background 0.15s, color 0.15s;
+    }
+    .modal-close:hover { background: #f4f4f5; color: #18181b; }
+    body.modal-open { overflow: hidden; }
+    .btn-text {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.875rem; font-weight: 600; color: #1a4a7a;
+      background: none; border: none; cursor: pointer; padding: 0;
+      margin-top: 1rem;
+      transition: color 0.15s, gap 0.2s;
+    }
+    .btn-text:hover { color: #123456; gap: 0.5rem; }
   </style>
 </head>
 <body class="bg-white text-ink-900 antialiased">
@@ -331,6 +393,7 @@
             <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
               “The Integrative Reflexology Center gave me more than a skill. It gave me hope, healing, future — and my pain became my gift.”
             </p>
+            <button type="button" class="btn-text" data-modal="modal-mbabazi">Read full testimony <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -352,6 +415,7 @@
             <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
               “We consider Mikye as one of our family members in the way he felt free and gave home care to my brother Albert.”
             </p>
+            <button type="button" class="btn-text" data-modal="modal-nyota">Read full testimony <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -373,6 +437,7 @@
             <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
               “The existence of this Center in the refugee camp improves overall community wellness, not just for refugees but also for the host population.”
             </p>
+            <button type="button" class="btn-text" data-modal="modal-grace">Read full testimony <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -394,6 +459,7 @@
             <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
               “That was my amazing relief through reflexology technique.”
             </p>
+            <button type="button" class="btn-text" data-modal="modal-jeanclaude">Read full testimony <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -548,6 +614,84 @@
     </div>
   </footer>
 
+
+  <!-- Full testimony modals -->
+  <div class="modal-overlay" id="modal-mbabazi" role="dialog" aria-modal="true" aria-labelledby="title-mbabazi">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
+          <h3 id="title-mbabazi" class="text-lg font-semibold text-ink-900 tracking-tight">Mbabazi Solange — Journey from Pain to Purpose</h3>
+        </div>
+        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>My name is Mbabazi Solange. I am a 23-year-old refugee and single mother of two children. I am Rwandese by nationality. We arrived in camp in 2002 due to the genocide which took place in Rwanda in 1994, but I was born in Tanzania. We came to Malawi to seek refuge. Upon reaching Malawi, my parents had to work very hard for us to survive. After a few years in the camp we shifted to Lilongwe; my parents were looking for a living. We stayed in Lilongwe for some years and returned to the camp because life became harder. When I got back in the camp I was almost sixteen years old. Many boys were proposing to me; by then I thought I was very beautiful — more than every girl — until I dropped from school.</p>
+        <p>My parents were not concerned about anything, so I thought it was okay. It was too late when I realized that I had ruined my own future. When I got pregnant they chased me from home. I was living with my friend; if I didn’t provide she would shout at me all night long. I shifted; I went to quarantine and begged to be allowed to stay there. I stayed there for almost eight months. In my journey through pregnancy I experienced many aspects of violence, and the men who played with my body did not help me at all after I was kicked out by my parents. From lying on the floor and being beaten by the men I had sex with, my body started to suffer from back pain, sleeplessness, and depression. That is when my mother came and took me back home — but still life was not easy.</p>
+        <p>When I heard about the reflexology training, I joined with little confidence. At the first time, my hands trembled during practice. But with an expert teacher, reflexologist Mr. Mikye Wa Byondo — he never tired of guiding me — slowly I came to find myself and began healing various patients.</p>
+        <p>Today, I run a small reflexology booth. My pain has lessened, my confidence has grown, and I now support my children’s school fees with my earnings. I also encourage other women to join and learn reflexology techniques.</p>
+        <p><em>The Integrative Reflexology Center gave me more than a skill. It gave me hope, healing, future — and “My pain became my gift.”</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-nyota" role="dialog" aria-modal="true" aria-labelledby="title-nyota">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
+          <h3 id="title-nyota" class="text-lg font-semibold text-ink-900 tracking-tight">Nyota Kasongo</h3>
+        </div>
+        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Hello fellow friends,</p>
+        <p>My name is Nyota Kasongo; I am 35 years old and mother of 5 children. I am Congolese by nationality, and would come up with my impressive testimony, that I have experienced for the first time in my life, about Reflexology techniques. Since my brother “Albert Kasongo Del” has amazingly got healed within almost a month, after having been affected by an accidental stroke that led to a left hemiplegia and an eye socket swelling, including a blood clot in the brain that have been examined by the two main hospitals here in Malawi: MIM &amp; Kamuzu Central Hospital, that released him and saying that there is no assistance at the local level, unless the UNHCR may get charge of his transfer to get treatment out of Malawi.</p>
+        <p>At the moment in 2021, we did not expect and consent if reflexology could resolve that critical condition of my brother that resulted from an accident when he wanted to separate a couple of people fighting for an unknown reason…</p>
+        <p>His occipital zone has got a shock and frozen the blood in the brain and automatically paralyzed in few days after that accident which has caused a social-familial conflict between two families. However, when we consequently have decided to meet the Reflexologist Mr. Mikye Wa Byondo, a month after the incident period, my brother Albert started getting treatment and got totally healed within a month. And this sorted even out the concerned conflict between 2 families. You can’t believe — the whole family and community were surprised to see my brother recover and start playing football as usual, until he was lucky enough to get resettlement and go to Canada. Many refugees have been amazed by the fact of healing someone who was rejected in such big hospitals, and then getting better without medicine (drugs) but with the miracles of touching, rubbing the soles of the feet and exercises.</p>
+        <p>We consider Mikye as one of our family member in the way he felt free and giving home care to my brother Albert Kasongo. What hurts me about this life of refuge is not being able to pay him anything other than praying if this potential and powerful treatment could sustain and assist more vulnerable in need of support.</p>
+        <p>Thank you</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-grace" role="dialog" aria-modal="true" aria-labelledby="title-grace">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
+          <h3 id="title-grace" class="text-lg font-semibold text-ink-900 tracking-tight">Grace Banda Raston</h3>
+        </div>
+        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>My greetings to all,</p>
+        <p>My name is Grace Banda Raston, I am Malawian. I thank so much since I have got relief. I was suffering from salpingitis for six months in 2020. A certain Mercy Kumwenda living in Area 18 Lilongwe who told me that I should reach at the Integrative Reflexology Center in Dzaleka Refugee Camp whereby she got healed of her kidney failure. When I reached there and met 2 women practicing in the center, called Mrs. Francine Faila Tambwe and Zabulonda Vivian. But I expected to meet with the boy who treated Mrs. Kumwenda. At the end, I have been treated by Madam Francine within two weeks and get healed up to now.</p>
+        <p>What amazes me about our country, after wasting money and going to various hospitals without success, I went to the refugee center, which doesn’t even have a well-built center, and I was treated for only 2 weeks and completely recovered. I concluded that vulnerable communities in Malawi face extreme challenges accessing affordable and effective healthcare. But despite that, I consent this is an important therapy and newer in our country that merit any holistic support to serve more people, not only refugees but also the Malawians. Reflexology is a low-cost, non-invasive therapy that can supplement strained national health systems. It reduces demand on hospitals by helping manage conditions like anxiety, PTSD, hypertension, and all NCDs.</p>
+        <p>Considering that there are many cases that cannot be solved in our regular hospitals, but with these new reflexology techniques, many people are losing their lives and do not know where they can be helped. The existence of this Center in refugee camp and offering such services improves overall community wellness, not just for refugees but also for the host population.</p>
+        <p>Many thanks for this center establishment in the Dzaleka Refugee Camp, and this is my testimony — IRC is helping a lot.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-jeanclaude" role="dialog" aria-modal="true" aria-labelledby="title-jeanclaude">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
+          <h3 id="title-jeanclaude" class="text-lg font-semibold text-ink-900 tracking-tight">Bigirimana Jean Claude</h3>
+        </div>
+        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Hello Guys,</p>
+        <p>My name is Bigirimana Jean Claude, I am from Burundi. I came here in Malawi since 1994 when the war raged in our country. I continued to experience refugee life as the government and UNHCR organized to serve the refugees. But once upon a time in 2015, I have got a heavy pain in the low spine for almost two years meanwhile I was under medication of injections and pain killers. As I said, life in the camp is not easy and access to money is more difficult than usual. Based on the pain I went through, everything I had was already used up in my treatment for those two years until I was told I had to wait for death at home with no hope of ever returning to my normal state, because pains increased day after day and caused a lumbago that prevented me to walk and leave my home place. Fortunately one of my neighbors who have got relief from his lasting migraine and hemorrhoids told me about foot massage done by a certain Congolese. They directed me to the center he opened here in the camp, but I found myself ill and could not reach the center.</p>
+        <p>On 2017 June, the same neighbors who had witnessed the miracle of Mr. Mikye volunteered to go and call him to assist me. Then after investigating, he decided to assist me and got relief after 3 weeks of treatment without any medication. But the Reflexologist told me that the most affecting key points are “stress and the chemical fertilizer usage for farming” and that is impacting in damaging kidney function until providing such ailments like lumbago and further.</p>
+        <p>That was my amazing relief through Reflexology technique.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
@@ -556,6 +700,26 @@
     const mobileMenu = document.getElementById('mobile-menu');
     mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     document.querySelectorAll('.mobile-nav').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    
+    // Testimony modals
+    document.querySelectorAll('[data-modal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const el = document.getElementById(btn.getAttribute('data-modal'));
+        if (!el) return;
+        el.classList.add('is-open');
+        document.body.classList.add('modal-open');
+      });
+    });
+    function closeModals() {
+      document.querySelectorAll('.modal-overlay.is-open').forEach(m => m.classList.remove('is-open'));
+      document.body.classList.remove('modal-open');
+    }
+    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeModals));
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModals(); });
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModals(); });
 
     document.getElementById('contact-form').addEventListener('submit', (e) => {
       e.preventDefault();
