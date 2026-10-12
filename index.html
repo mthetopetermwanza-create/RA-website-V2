@@ -1,734 +1,610 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Reflexologists Association (RA) — Responsible reflexology and community wellbeing in Dzaleka Refugee Camp, Malawi.">
-  <title>Reflexologists Association | Responsible Practice · Community Wellbeing</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REFLEXOLOGISTS ASSOCIATION (RA) | Dzaleka, Malawi</title>
+  <meta name="description" content="Reflexologists Association — advancing responsible reflexology, holistic wellbeing and community empowerment in Dzaleka Refugee Camp, Malawi. Officially registered NGO." />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ra: {50:'#f0f5fa',100:'#e0ebf5',200:'#c1d7eb',500:'#1a4a7a',600:'#163f68',700:'#123456',800:'#0e2a45',900:'#0a1f33'},
-            sage: {50:'#eef7f2',500:'#2d6a4f',600:'#245a42'},
-            ink: {50:'#fafafa',100:'#f4f4f5',200:'#e4e4e7',300:'#d4d4d8',400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b'}
+            primary: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' },
+            accent: { 50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d' }
           },
-          fontFamily: { sans: ['Inter','system-ui','-apple-system','sans-serif'] }
+          fontFamily: { sans: ['Inter','system-ui','-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','sans-serif'] }
         }
       }
     }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+    * { -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-    body { -webkit-font-smoothing: antialiased; font-family: Inter, system-ui, sans-serif; }
-    .nav-link { font-size: 0.875rem; font-weight: 500; color: #3f3f46; transition: color 0.15s; }
-    .nav-link:hover, .nav-link.active { color: #1a4a7a; }
-    #navbar.scrolled {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: saturate(180%) blur(16px);
-      -webkit-backdrop-filter: saturate(180%) blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      font-weight: 600; font-size: 0.9375rem; border-radius: 9999px;
-      transition: all 0.2s cubic-bezier(0.25,0.1,0.25,1); letter-spacing: -0.01em;
-      border: none; cursor: pointer; text-decoration: none;
-    }
-    .btn-primary { background: #1a4a7a; color: #fff; padding: 0.875rem 1.75rem; }
-    .btn-primary:hover { background: #123456; transform: scale(1.02); }
-    .btn-secondary { background: transparent; color: #1a4a7a; padding: 0.875rem 1.75rem; border: 1.5px solid #c1d7eb; }
-    .btn-secondary:hover { background: #f0f5fa; border-color: #1a4a7a; }
-    .section-label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1a4a7a; }
-    input, textarea, select { transition: border-color 0.2s, box-shadow 0.2s; }
-    input:focus, textarea:focus, select:focus { outline: none; border-color: #1a4a7a; box-shadow: 0 0 0 3px rgba(26,74,122,0.12); }
-    ::selection { background: #c1d7eb; color: #0a1f33; }
-
-    /* Testimony modals */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(15, 15, 20, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.25rem;
-      opacity: 0; visibility: hidden;
-      transition: opacity 0.25s ease, visibility 0.25s ease;
-    }
-    .modal-overlay.is-open { opacity: 1; visibility: visible; }
-    .modal-panel {
-      background: #fff;
-      border-radius: 1.25rem;
-      max-width: 40rem;
-      width: 100%;
-      max-height: min(88vh, 42rem);
-      display: flex; flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      transform: translateY(12px) scale(0.98);
-      transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
-    }
-    .modal-overlay.is-open .modal-panel { transform: translateY(0) scale(1); }
-    .modal-header {
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
-      padding: 1.35rem 1.5rem 1rem;
-      border-bottom: 1px solid #e4e4e7;
-      flex-shrink: 0;
-    }
-    .modal-body {
-      padding: 1.25rem 1.5rem 1.75rem;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      font-size: 0.9375rem;
-      line-height: 1.7;
-      color: #3f3f46;
-    }
-    .modal-body p { margin-bottom: 1rem; }
-    .modal-body p:last-child { margin-bottom: 0; }
-    .modal-close {
-      flex-shrink: 0;
-      width: 2.25rem; height: 2.25rem;
-      border-radius: 9999px;
-      border: 1px solid #e4e4e7;
-      background: #fafafa;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      color: #52525b;
-      transition: background 0.15s, color 0.15s;
-    }
-    .modal-close:hover { background: #f4f4f5; color: #18181b; }
-    body.modal-open { overflow: hidden; }
-    .btn-text {
-      display: inline-flex; align-items: center; gap: 0.35rem;
-      font-size: 0.875rem; font-weight: 600; color: #1a4a7a;
-      background: none; border: none; cursor: pointer; padding: 0;
-      margin-top: 1rem;
-      transition: color 0.15s, gap 0.2s;
-    }
-    .btn-text:hover { color: #123456; gap: 0.5rem; }
+    body { background: #f8fafc; color: #0f172a; }
+    .glass { background: rgba(255,255,255,0.78); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255,255,255,0.55); box-shadow: 0 8px 32px rgba(15,23,42,0.06); }
+    .glass-card { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(226,232,240,0.9); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .glass-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -10px rgba(14,165,233,0.14); border-color: rgba(14,165,233,0.25); }
+    .gradient-text { background: linear-gradient(135deg,#0284c7,#0ea5e9,#22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-gradient { background: radial-gradient(ellipse 80% 55% at 50% -15%, rgba(14,165,233,0.14), transparent), linear-gradient(180deg,#f0f9ff 0%,#f8fafc 50%,#fff 100%); }
+    .nav-link { position: relative; transition: color 0.2s; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background: linear-gradient(90deg,#0ea5e9,#22c55e); transition: width 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary { background: linear-gradient(135deg,#0284c7,#0ea5e9); box-shadow: 0 4px 14px rgba(14,165,233,0.3); transition: all 0.25s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,165,233,0.38); }
+    .btn-ghost { background: rgba(255,255,255,0.75); border: 1px solid rgba(14,165,233,0.2); transition: all 0.2s; }
+    .btn-ghost:hover { background:#fff; border-color:#0ea5e9; }
+    .modal-backdrop { background: rgba(15,23,42,0.55); backdrop-filter: blur(8px); }
+    .modal-panel { max-height: min(88vh, 720px); overflow-y: auto; }
+    .acc-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; opacity: 0; }
+    .acc-content.open { max-height: 400px; opacity: 1; }
+    .acc-chevron { transition: transform 0.3s; }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+    .tab-btn.active { background: linear-gradient(135deg,#0284c7,#0ea5e9); color: #fff; box-shadow: 0 4px 12px rgba(14,165,233,0.28); }
+    .carousel-wrap { position: relative; overflow: hidden; border-radius: 1.25rem; }
+    .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); height: 100%; }
+    .carousel-slide { min-width: 100%; position: relative; height: 100%; }
+    .carousel-dots button { width: 8px; height: 8px; border-radius: 9999px; background: rgba(255,255,255,0.45); border: none; cursor: pointer; padding: 0; transition: all 0.25s; }
+    .carousel-dots button.active { width: 22px; background: #fff; }
+    .overview-clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .overview-clamp.expanded { -webkit-line-clamp: unset; display: block; }
+    @keyframes scaleIn { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+    .modal-enter { animation: scaleIn 0.3s ease forwards; }
   </style>
 </head>
-<body class="bg-white text-ink-900 antialiased">
+<body class="font-sans antialiased">
 
   <!-- Nav -->
-  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-2.5">
-        <img src="ra_logo_nav.png" alt="RA" class="h-9 w-9 object-contain" width="36" height="36">
-        <span class="text-[15px] font-semibold tracking-tight text-ink-900 hidden sm:block">Reflexologists Association</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-7">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#impact" class="nav-link">Impact</a>
-        <a href="#insights" class="nav-link">Insights</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <a href="#contact" class="btn btn-primary text-sm py-2.5 px-5 hidden sm:inline-flex">Partner with us</a>
-        <button id="mobile-menu-btn" class="md:hidden p-2 -mr-2 text-ink-700" aria-label="Menu">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="#home" class="flex items-center gap-3 group">
+          <img src="ra_logo.png" alt="RA" class="w-11 h-11 rounded-full object-cover shadow-lg ring-2 ring-white/80 group-hover:scale-105 transition-transform">
+          <div class="hidden sm:block">
+            <span class="font-bold text-[12px] sm:text-[13px] tracking-wide text-slate-900 uppercase leading-tight">Reflexologists Association</span>
+            <span class="block text-[10px] font-semibold text-sky-600 tracking-widest uppercase">RA · Dzaleka, Malawi</span>
+          </div>
+        </a>
+        <div class="hidden lg:flex items-center gap-5">
+          <a href="#about" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">About</a>
+          <a href="#focus" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Focus</a>
+          <a href="#stories" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Stories</a>
+          <a href="#team" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Team</a>
+          <a href="#volunteer" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Volunteer</a>
+          <a href="#reports" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Reports</a>
+          <button onclick="openModal('contact')" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full">Contact</button>
+        </div>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Menu">
+          <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-ink-100">
-      <div class="px-6 py-5 space-y-1">
-        <a href="#about" class="block py-2.5 text-[15px] font-medium mobile-nav">About</a>
-        <a href="#work" class="block py-2.5 text-[15px] font-medium mobile-nav">Work</a>
-        <a href="#impact" class="block py-2.5 text-[15px] font-medium mobile-nav">Impact</a>
-        <a href="#insights" class="block py-2.5 text-[15px] font-medium mobile-nav">Insights</a>
-        <a href="#contact" class="block py-2.5 text-[15px] font-medium mobile-nav">Contact</a>
-        <a href="#contact" class="btn btn-primary mt-4 w-full mobile-nav">Partner with us</a>
+    <div id="mobile-menu" class="hidden lg:hidden glass border-t border-slate-200/50">
+      <div class="px-5 py-4 space-y-1">
+        <a href="#about" class="block text-sm font-medium text-slate-700 py-2.5">About</a>
+        <a href="#focus" class="block text-sm font-medium text-slate-700 py-2.5">Focus</a>
+        <a href="#stories" class="block text-sm font-medium text-slate-700 py-2.5">Stories</a>
+        <a href="#team" class="block text-sm font-medium text-slate-700 py-2.5">Team</a>
+        <a href="#volunteer" class="block text-sm font-medium text-slate-700 py-2.5">Volunteer</a>
+        <a href="#reports" class="block text-sm font-medium text-slate-700 py-2.5">Reports</a>
+        <button onclick="openModal('contact');document.getElementById('mobile-menu').classList.add('hidden')" class="w-full btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full mt-2">Contact</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- HOME / HERO -->
-  <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-ra-50 to-white"></div>
-    <div class="relative max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl">
-        <p class="section-label mb-5">Dzaleka Refugee Camp · Malawi</p>
-        <h1 class="text-4xl sm:text-5xl md:text-[3.25rem] font-semibold tracking-tight text-ink-950 leading-[1.1] mb-6">
-          Responsible reflexology.<br class="hidden sm:block"> Community wellbeing.
-        </h1>
-        <p class="text-lg md:text-xl text-ink-600 leading-relaxed max-w-xl mb-10">
-          We unite practitioners and advance reflexology as a complementary therapy — with a special focus on vulnerable and underserved communities.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#work" class="btn btn-primary">Explore our work</a>
-          <a href="#about" class="btn btn-secondary">About the Association</a>
+  <!-- Hero + Carousel -->
+  <section id="home" class="hero-gradient pt-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 pt-6 pb-4">
+      <div class="carousel-wrap h-[220px] sm:h-[300px] md:h-[420px] shadow-2xl shadow-sky-900/10 mb-8">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_02.jpg" alt="Graduation celebration" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Training & graduation</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Building skilled practitioners for community wellbeing</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_01.jpg" alt="Reflexology session outdoors" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Community care</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Professional reflexology reaching people where they live</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_03.jpg" alt="Graduates with certificates" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Dzaleka · Malawi</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Health is wealth — wellbeing for body and mind</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_05.jpg" alt="Women graduates" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Women & youth</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Empowering women through skills and professional practice</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_06.jpg" alt="Certificate holders" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Partnership</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Collaborating for professional standards and community impact</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_10.jpg" alt="Foot reflexology session" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Complementary care</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Safe, affordable, non-invasive support alongside existing health services</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_08.jpg" alt="Holistic reflexology graduation" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Since 2021</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">From grassroots service to a registered professional association</p></div>
+          </div>
+          <div class="carousel-slide">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/35 to-transparent z-10"></div>
+            <img src="carousel_04.jpg" alt="Leadership at IRC wall" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8"><p class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Integrative Reflexology Center</p><p class="text-white text-lg sm:text-xl font-semibold max-w-lg">Our strategic arm for training, services and community programmes</p></div>
+          </div>
         </div>
+        <div class="carousel-dots absolute bottom-4 right-4 z-30 flex gap-2" id="carousel-dots"></div>
+        <button type="button" id="carousel-prev" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/25 hover:bg-white/45 backdrop-blur text-white flex items-center justify-center" aria-label="Previous"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+        <button type="button" id="carousel-next" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/25 hover:bg-white/45 backdrop-blur text-white flex items-center justify-center" aria-label="Next"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
       </div>
-      <div class="mt-20 pt-10 border-t border-ink-100 grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div>
-          <p class="text-sm font-semibold text-ink-900 mb-1">Professional standards</p>
-          <p class="text-sm text-ink-500 leading-snug">Training, ethics & practitioner support</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-ink-900 mb-1">Community services</p>
-          <p class="text-sm text-ink-500 leading-snug">Accessible care for vulnerable populations</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-ink-900 mb-1">Women & youth</p>
-          <p class="text-sm text-ink-500 leading-snug">Skills, confidence & livelihood pathways</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-ink-900 mb-1">Partnerships</p>
-          <p class="text-sm text-ink-500 leading-snug">Health, humanitarian & development allies</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Vision band -->
-  <section class="py-16 md:py-20 bg-ra-800">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-4">Vision</p>
-      <p class="text-2xl md:text-3xl font-medium text-white tracking-tight leading-snug">
-        “To make reflexology an acclaimed complementary therapy.”
-      </p>
-    </div>
-  </section>
+      <div class="grid lg:grid-cols-12 gap-8 items-start pb-14">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Registered NGO · Dzaleka Refugee Camp · Malawi
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-tight text-slate-900 leading-[1.15] uppercase">Reflexologists Association</h1>
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">Making reflexology an <span class="gradient-text font-semibold">acclaimed</span> complementary therapy — professional practice, training and holistic wellbeing for vulnerable communities.</p>
 
-  <!-- ABOUT -->
-  <section id="about" class="py-24 md:py-28">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-20">
+          <div class="glass rounded-2xl p-5 sm:p-6 border border-slate-200/70 space-y-3">
+            <p class="text-xs font-semibold text-sky-600 uppercase tracking-wider">Organisation overview</p>
+            <div class="text-sm text-slate-600 leading-relaxed space-y-2.5">
+              <p><span class="font-semibold text-slate-900">Vision —</span> To make reflexology an acclaimed complementary therapy.</p>
+              <p><span class="font-semibold text-slate-900">Mission —</span> To unify and advocate for reflexology therapists and promote reflexology as a valuable complementary therapy through holistic support and non-invasive touch therapy.</p>
+              <div id="overview-extra" class="overview-clamp space-y-2.5">
+                <p><span class="font-semibold text-slate-900">Core values —</span> Professionalism, Compassion, Openness, Diversity, Inclusion, Excellence.</p>
+                <p><span class="font-semibold text-slate-900">Impact —</span> Training practitioners, community-based care, empowering women and youth, and supporting refugees and host communities in Dzaleka and beyond.</p>
+                <p><span class="font-semibold text-slate-900">Our story —</span> Grew from HUSID grassroots service; formalised as RA in 2022; registered as an NGO with the Ministry of Justice on 19 September 2025 (Trustees Incorporation Act, registration link No. D6HPJ5R).</p>
+              </div>
+              <button type="button" id="overview-toggle" class="text-sky-600 text-sm font-semibold hover:text-sky-700">Read more →</button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="openModal('our-story')" class="btn-primary text-white font-semibold px-6 py-3 rounded-full text-sm">Our story</button>
+            <a href="#stories" class="btn-ghost text-slate-800 font-semibold px-6 py-3 rounded-full text-sm">Community stories</a>
+          </div>
+        </div>
         <div class="lg:col-span-5">
-          <p class="section-label mb-4">Who we are</p>
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-6">
-            A professional association rooted in community.
-          </h2>
-          <p class="text-ink-600 leading-relaxed mb-4">
-            Reflexologists Association is based in Dzaleka Refugee Camp. We provide oversight and support for practitioners while promoting reflexology as a valuable complementary therapy — especially for people affected by displacement and limited access to supportive services.
-          </p>
-        </div>
-        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-          <div class="bg-ra-50 p-7 rounded-2xl border border-ra-100/60">
-            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Complementary, not alternative</h3>
-            <p class="text-sm text-ink-600 leading-relaxed">We work alongside existing health and psychosocial services, with clear referral pathways when specialised care is required.</p>
-          </div>
-          <div class="bg-sage-50 p-7 rounded-2xl border border-sage-500/10">
-            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Community empowerment</h3>
-            <p class="text-sm text-ink-600 leading-relaxed">Training builds skills and livelihood opportunities — particularly for vulnerable women — while expanding access to supportive care.</p>
-          </div>
-          <div class="bg-ink-50 p-7 rounded-2xl border border-ink-100 sm:col-span-2">
-            <h3 class="font-semibold text-ink-900 mb-2 tracking-tight">Responsible practice</h3>
-            <p class="text-sm text-ink-600 leading-relaxed">Every programme remains grounded in professional standards, ethical conduct, and the dignity of the people we serve.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vision Mission Purpose -->
-      <div class="space-y-6 mb-20">
-        <div class="grid lg:grid-cols-3 gap-6">
-          <div class="bg-ra-800 text-white rounded-2xl p-8 md:p-10">
-            <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-4">Vision</p>
-            <p class="text-xl md:text-2xl font-medium tracking-tight leading-snug">To make reflexology an acclaimed complementary therapy.</p>
-          </div>
-          <div class="bg-ra-50 rounded-2xl p-8 md:p-10 lg:col-span-2 border border-ra-100/50">
-            <p class="section-label mb-4">Mission</p>
-            <p class="text-ink-700 leading-relaxed text-[15px]">To unify and advocate on behalf of reflexology therapists and to promote reflexology as a valuable complementary therapy through holistic support and natural healing processes for human wellbeing, using non-invasive touch therapy to stimulate specific reflex points and support physical, emotional and energetic balance.</p>
-          </div>
-        </div>
-        <div class="bg-ink-50 rounded-2xl p-8 md:p-10 border border-ink-100">
-          <p class="section-label mb-4">Purpose</p>
-          <p class="text-ink-700 leading-relaxed max-w-4xl text-[15px]">RA seeks to strengthen the professional identity and responsible practice of reflexology while increasing public awareness of its potential value as a complementary approach to wellbeing. The organisation also seeks to build partnerships and develop specialised programmes, including the Integrative Reflexology Center and allied psychosocial support initiatives for vulnerable populations.</p>
-        </div>
-      </div>
-
-      <!-- Values -->
-      <div class="mb-20">
-        <div class="max-w-xl mb-10">
-          <p class="section-label mb-4">Core values</p>
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950">What guides every decision</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-2xl overflow-hidden border border-ink-100">
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Professionalism</h3><p class="text-sm text-ink-500">Responsible, ethical and competent practice.</p></div>
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Compassion</h3><p class="text-sm text-ink-500">Dignity, empathy and respect in every interaction.</p></div>
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Openness</h3><p class="text-sm text-ink-500">Learning, dialogue, transparency and collaboration.</p></div>
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Diversity</h3><p class="text-sm text-ink-500">People of different backgrounds, experiences and abilities.</p></div>
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Inclusion</h3><p class="text-sm text-ink-500">Vulnerable and underserved people are not left behind.</p></div>
-          <div class="bg-white p-8"><h3 class="font-semibold text-ink-900 mb-2">Excellence</h3><p class="text-sm text-ink-500">Exemplary in service, learning, advocacy and engagement.</p></div>
-        </div>
-      </div>
-
-      <!-- Structure -->
-      <div>
-        <div class="max-w-xl mb-10">
-          <p class="section-label mb-4">Structure</p>
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950">RA and the Integrative Reflexology Center</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-5">
-          <div class="bg-ra-800 text-white rounded-2xl p-8">
-            <p class="text-ra-200 text-xs font-semibold tracking-wider uppercase mb-3">Parent organisation</p>
-            <h3 class="font-semibold text-lg mb-3">Reflexologists Association</h3>
-            <p class="text-ra-100 text-sm leading-relaxed">Institutional identity, governance, strategic direction and professional framework.</p>
-          </div>
-          <div class="bg-white border border-sage-500/15 rounded-2xl p-8">
-            <p class="text-sage-500 text-xs font-semibold tracking-wider uppercase mb-3">Strategic arm</p>
-            <h3 class="font-semibold text-lg text-ink-900 mb-3">Integrative Reflexology Center</h3>
-            <p class="text-ink-600 text-sm leading-relaxed">Practical platform through which RA implements programmes and community initiatives.</p>
-          </div>
-          <div class="bg-white border border-ink-100 rounded-2xl p-8">
-            <p class="text-ink-400 text-xs font-semibold tracking-wider uppercase mb-3">On the ground</p>
-            <h3 class="font-semibold text-lg text-ink-900 mb-3">Projects & initiatives</h3>
-            <p class="text-ink-600 text-sm leading-relaxed">Practical expressions of RA’s mission — services, training, empowerment and partnerships.</p>
+          <div class="glass rounded-3xl p-7 sm:p-8 shadow-xl shadow-sky-900/5">
+            <div class="flex justify-center mb-5">
+              <img src="ra_logo.png" alt="RA" class="w-24 h-24 rounded-full object-cover shadow-xl ring-4 ring-white/60">
+            </div>
+            <div class="text-center">
+              <h2 class="text-base font-bold text-slate-900 uppercase tracking-wide">Reflexologists Association</h2>
+              <p class="text-sky-600 font-medium text-sm mt-0.5">RA</p>
+              <p class="text-xs text-slate-500 mt-2">Registered Trustees · Dzaleka Refugee Camp<br>Dowa District, Central Region, Malawi</p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-100 grid grid-cols-3 gap-2 text-center">
+              <button onclick="openModal('values')" class="group"><div class="text-xl font-bold text-sky-600 group-hover:scale-110 transition-transform">6</div><div class="text-[10px] text-slate-500">Values</div></button>
+              <button onclick="openModal('programs')" class="group"><div class="text-xl font-bold text-emerald-600 group-hover:scale-110 transition-transform">5</div><div class="text-[10px] text-slate-500">Focus areas</div></button>
+              <button onclick="openModal('objectives')" class="group"><div class="text-xl font-bold text-sky-600 group-hover:scale-110 transition-transform">4</div><div class="text-[10px] text-slate-500">Objectives</div></button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK -->
-  <section id="work" class="py-24 md:py-28 bg-ink-50">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl mb-14">
-        <p class="section-label mb-4">Our work</p>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">From professional development to community wellbeing.</h2>
-        <p class="text-ink-600 leading-relaxed">RA’s work spans practitioner support, community services, training, empowerment and partnerships — with the Integrative Reflexology Center as our main delivery platform.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
-        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
-          <p class="text-xs font-semibold text-ra-500 mb-4">01</p>
-          <h3 class="text-lg font-semibold text-ink-900 mb-2">Professional Development</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Training, capacity building, practitioner support and the promotion of responsible, ethical practice.</p>
-        </article>
-        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
-          <p class="text-xs font-semibold text-ra-500 mb-4">02</p>
-          <h3 class="text-lg font-semibold text-ink-900 mb-2">Community Wellness</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Reflexology awareness, public sensitisation and supportive wellness activities closer to communities.</p>
-        </article>
-        <article class="p-8 rounded-2xl border border-sage-500/20 bg-sage-50">
-          <p class="text-xs font-semibold text-sage-500 mb-4">03</p>
-          <h3 class="text-lg font-semibold text-ink-900 mb-2">Integrative Reflexology Center</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Platform for training, services, knowledge development, research and community wellbeing.</p>
-        </article>
-        <article class="p-8 rounded-2xl border border-ink-100 bg-white">
-          <p class="text-xs font-semibold text-ra-500 mb-4">04</p>
-          <h3 class="text-lg font-semibold text-ink-900 mb-2">Vulnerable Populations</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Support for people affected by displacement, poverty, trauma, violence and other forms of vulnerability.</p>
-        </article>
-        <article class="p-8 rounded-2xl border border-ink-100 bg-white md:col-span-2 lg:col-span-1">
-          <p class="text-xs font-semibold text-ra-500 mb-4">05</p>
-          <h3 class="text-lg font-semibold text-ink-900 mb-2">Partnership & Advocacy</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Collaboration with authorities, health professionals, organisations and reflexology networks.</p>
-        </article>
-      </div>
-
-      <!-- IRC -->
-      <div class="bg-white rounded-2xl border border-ink-100 p-8 md:p-12">
-        <div class="flex items-center gap-3 mb-5">
-          <img src="irc_logo.png" alt="IRC" class="h-11 w-11 object-contain">
-          <p class="section-label !mb-0">Strategic programmatic arm</p>
+  <!-- About -->
+  <section id="about" class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-10">
+        <div class="max-w-xl">
+          <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Who we are</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">A professional community rooted in care</h2>
         </div>
-        <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-ink-950 mb-4">Integrative Reflexology Center</h3>
-        <p class="text-ink-600 leading-relaxed max-w-2xl mb-8">The Center is how RA turns vision into action. It delivers community services, training, research and empowerment — remaining an integral part of the Association, not a separate organisation.</p>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Community-Based Services</h4><p class="text-xs text-ink-500">Reflexology for vulnerable populations in accessible settings.</p></div>
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Training & Skills</h4><p class="text-xs text-ink-500">Capacity building for practitioners and community workers.</p></div>
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Research & Evidence</h4><p class="text-xs text-ink-500">Knowledge on reflexology and integrative wellbeing.</p></div>
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Women & Youth</h4><p class="text-xs text-ink-500">Skills, livelihoods and professional opportunities.</p></div>
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Volunteer & Collaboration</h4><p class="text-xs text-ink-500">International partners contributing expertise.</p></div>
-          <div class="p-5 rounded-xl bg-ink-50"><h4 class="font-semibold text-ink-900 text-sm mb-1">Outreach & Resources</h4><p class="text-xs text-ink-500">Partnerships with donors and institutions.</p></div>
+        <button onclick="openModal('our-story')" class="text-sky-600 text-sm font-medium hover:text-sky-700 self-start">Full story →</button>
+      </div>
+      <div class="glass rounded-2xl overflow-hidden border border-slate-200/70">
+        <div class="flex flex-wrap gap-1 p-2 bg-slate-50/80 border-b border-slate-100">
+          <button class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium text-slate-600" data-tab="vision">Vision & Mission</button>
+          <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-600" data-tab="purpose">Purpose</button>
+          <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-600" data-tab="why">Why reflexology</button>
+        </div>
+        <div class="p-6 sm:p-8">
+          <div id="tab-vision" class="tab-panel space-y-4">
+            <div><p class="text-sky-600 text-xs font-semibold uppercase tracking-wider mb-1">Vision</p><p class="text-lg font-medium text-slate-900">“To make reflexology an acclaimed complementary therapy.”</p></div>
+            <div class="h-px bg-slate-100"></div>
+            <div><p class="text-emerald-600 text-xs font-semibold uppercase tracking-wider mb-1">Mission</p><p class="text-slate-600 text-sm leading-relaxed">To unify and advocate on behalf of reflexology therapists and to promote reflexology as a valuable complementary therapy through holistic support and natural healing processes for human wellbeing, using non-invasive touch therapy to stimulate specific reflex points and support physical, emotional and energetic balance.</p></div>
+          </div>
+          <div id="tab-purpose" class="tab-panel hidden space-y-3">
+            <p class="text-slate-600 text-sm leading-relaxed">RA strengthens the professional identity and responsible practice of reflexology, increases public awareness, builds partnerships, and develops specialised programmes — including the Integrative Reflexology Center — for vulnerable populations. Through the Simplified-Energetic Plethora Method (S-EPM), practitioners address conditions such as hypertension, kidney-related concerns, stroke recovery support, diabetes-related discomfort, asthma, lumbago, trauma-related stress and other non-communicable disease concerns, always as complementary care alongside existing health services.</p>
+            <button onclick="openModal('objectives')" class="text-sky-600 text-sm font-medium hover:underline">Strategic objectives →</button>
+          </div>
+          <div id="tab-why" class="tab-panel hidden space-y-3">
+            <p class="text-slate-600 text-sm leading-relaxed">Displacement, trauma and limited resources create barriers to healthcare in Dzaleka and surrounding areas. Reflexology offers a safe, affordable, medication-free complementary approach that can be delivered in community settings — with professional standards and clear referral pathways.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-medium">Accessible</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium">Supportive</span>
+              <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-medium">Community-based</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium">Empowering</span>
+              <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-medium">Professional</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- IMPACT -->
-  <section id="impact" class="py-24 md:py-28">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl mb-14">
-        <p class="section-label mb-4">Impact</p>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Complementary care that strengthens communities.</h2>
-        <p class="text-ink-600 leading-relaxed">We measure success by responsible practice, expanded access to supportive wellbeing services, and the empowerment of people — especially women and vulnerable groups.</p>
+  <!-- Focus IRC first -->
+  <section id="focus" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+      <div class="text-center mb-10">
+        <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Programmatic focus</p>
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Where we concentrate our energy</h2>
       </div>
-
-      <div class="bg-ra-800 text-white rounded-3xl p-10 md:p-14 mb-16">
-        <p class="text-ra-200 text-xs font-semibold tracking-widest uppercase mb-5">A message to partners and donors</p>
-        <p class="text-xl md:text-2xl font-medium tracking-tight leading-snug mb-6 max-w-2xl">Our approach does not seek to replace conventional medical or mental-health care.</p>
-        <p class="text-ra-100 leading-relaxed max-w-2xl">Rather, RA promotes reflexology as a complementary community-based practice that can work alongside existing health, psychosocial and humanitarian services, with appropriate safeguarding and referral pathways.</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
-        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Accessible</h3><p class="text-sm text-ink-500">Modest equipment and infrastructure requirements.</p></div>
-        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Supportive</h3><p class="text-sm text-ink-500">Relaxation, compassionate connection and structured self-care.</p></div>
-        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Community-based</h3><p class="text-sm text-ink-500">Services brought closer through centres, groups and outreach.</p></div>
-        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100"><h3 class="font-semibold text-ink-900 mb-2">Empowering</h3><p class="text-sm text-ink-500">Skills and livelihood opportunities, especially for women.</p></div>
-        <div class="bg-ink-50 rounded-2xl p-8 border border-ink-100 sm:col-span-2 lg:col-span-1"><h3 class="font-semibold text-ink-900 mb-2">Responsible</h3><p class="text-sm text-ink-500">Complementary care with clear referral pathways.</p></div>
-      </div>
-
-      <!-- Community stories -->
-      <div class="mb-6">
-        <p class="section-label mb-4">Community stories</p>
-        <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-ink-950 mb-3">Voices from Dzaleka and surrounding communities</h3>
-        <p class="text-ink-600 leading-relaxed max-w-2xl mb-12">Real experiences shared by people who trained, received care, or found new purpose through the Integrative Reflexology Center.</p>
-      </div>
-
-      <div class="space-y-10">
-
-        <!-- Mbabazi -->
-        <article class="grid md:grid-cols-12 gap-8 items-start bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
-          <div class="md:col-span-4">
-            <img src="photo_mbabazi.jpg" alt="Mbabazi Solange" class="w-full rounded-xl object-cover aspect-[4/5] bg-ink-100">
-          </div>
-          <div class="md:col-span-8">
-            <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-2">Practitioner · Dzaleka Refugee Camp</p>
-            <h4 class="text-xl font-semibold text-ink-900 tracking-tight mb-1">Mbabazi Solange</h4>
-            <p class="text-sm text-ink-500 mb-4">23 · Rwandese refugee · Single mother of two</p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              After difficult years in the camp — including leaving school early and facing hardship as a young mother — Mbabazi joined reflexology training with little confidence. “At the first time, my hands trembled during practice.” Guided by reflexologist Mr. Mikye Wa Byondo, she steadily built skill and began supporting others.
-            </p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              Today she runs a small reflexology booth. Her pain has lessened, her confidence has grown, and she supports her children’s school fees with her earnings. She also encourages other women to learn reflexology.
-            </p>
-            <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
-              “The Integrative Reflexology Center gave me more than a skill. It gave me hope, healing, future — and my pain became my gift.”
-            </p>
-            <button type="button" class="btn-text" data-modal="modal-mbabazi">Read full testimony <span aria-hidden="true">→</span></button>
-          </div>
-        </article>
-
-        <!-- Nyota -->
-        <article class="grid md:grid-cols-12 gap-8 items-start bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
-          <div class="md:col-span-4">
-            <img src="photo_nyota.jpg" alt="Nyota Kasongo" class="w-full rounded-xl object-cover aspect-[4/5] bg-ink-100">
-          </div>
-          <div class="md:col-span-8">
-            <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-2">Family testimony · Congolese community</p>
-            <h4 class="text-xl font-semibold text-ink-900 tracking-tight mb-1">Nyota Kasongo</h4>
-            <p class="text-sm text-ink-500 mb-4">35 · Congolese · Mother of five</p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              Nyota’s brother, Albert Kasongo, was left with left hemiplegia and related complications after an accident. Major hospitals in Malawi indicated limited local options. The family turned to the Integrative Reflexology Center and Mr. Mikye Wa Byondo.
-            </p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              Albert received care over about a month and recovered sufficiently to return to activities such as playing football. He later resettled in Canada. Nyota describes the care as restoring hope for the family and surprising the wider community.
-            </p>
-            <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
-              “We consider Mikye as one of our family members in the way he felt free and gave home care to my brother Albert.”
-            </p>
-            <button type="button" class="btn-text" data-modal="modal-nyota">Read full testimony <span aria-hidden="true">→</span></button>
-          </div>
-        </article>
-
-        <!-- Grace -->
-        <article class="grid md:grid-cols-12 gap-8 items-start bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
-          <div class="md:col-span-4">
-            <img src="photo_grace.jpg" alt="Grace Banda Raston" class="w-full rounded-xl object-cover aspect-[4/5] bg-ink-100">
-          </div>
-          <div class="md:col-span-8">
-            <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-2">Host community · Malawian</p>
-            <h4 class="text-xl font-semibold text-ink-900 tracking-tight mb-1">Grace Banda Raston</h4>
-            <p class="text-sm text-ink-500 mb-4">Malawian · Lilongwe</p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              Grace had struggled with salpingitis for six months in 2020. After limited success elsewhere, she was directed to the Integrative Reflexology Center in Dzaleka by someone who had found help there for kidney-related problems. She was treated by practitioners including Mrs. Francine Faila Tambwe.
-            </p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              She reports recovery within about two weeks and stresses that the Center serves not only refugees but also Malawians — a low-cost, non-invasive complement where health systems are under strain.
-            </p>
-            <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
-              “The existence of this Center in the refugee camp improves overall community wellness, not just for refugees but also for the host population.”
-            </p>
-            <button type="button" class="btn-text" data-modal="modal-grace">Read full testimony <span aria-hidden="true">→</span></button>
-          </div>
-        </article>
-
-        <!-- Jean Claude -->
-        <article class="grid md:grid-cols-12 gap-8 items-start bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
-          <div class="md:col-span-4">
-            <img src="photo_jeanclaude.jpg" alt="Bigirimana Jean Claude" class="w-full rounded-xl object-cover aspect-[4/5] bg-ink-100">
-          </div>
-          <div class="md:col-span-8">
-            <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-2">Client testimony · Burundian refugee</p>
-            <h4 class="text-xl font-semibold text-ink-900 tracking-tight mb-1">Bigirimana Jean Claude</h4>
-            <p class="text-sm text-ink-500 mb-4">Burundian · In Malawi since 1994</p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              From 2015, Jean Claude lived with severe low-spine pain for nearly two years, relying on injections and painkillers until resources were exhausted. Lumbago limited his mobility so severely that neighbours eventually called the reflexologist to him at home.
-            </p>
-            <p class="text-ink-600 leading-relaxed mb-4 text-[15px]">
-              After about three weeks of reflexology care with Mr. Mikye, he reports substantial relief without medication — an outcome he describes as restoring hope after being told he might only wait for the pain to worsen.
-            </p>
-            <p class="text-ink-800 font-medium italic text-[15px] border-l-2 border-ra-500 pl-4">
-              “That was my amazing relief through reflexology technique.”
-            </p>
-            <button type="button" class="btn-text" data-modal="modal-jeanclaude">Read full testimony <span aria-hidden="true">→</span></button>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- INSIGHTS -->
-  <section id="insights" class="py-24 md:py-28 bg-ink-50">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl mb-10">
-        <p class="section-label mb-4">Insights</p>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Reflections on practice, community and complementary care.</h2>
-        <p class="text-ink-600 leading-relaxed">Stories and field notes from practitioners, clients and host-community partners around Dzaleka Refugee Camp.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-5 max-w-3xl">
-        <a href="#impact" class="block bg-white border border-ink-100 rounded-2xl p-8 hover:border-ra-200 transition-colors">
-          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-2">Stories</p>
-          <h3 class="font-semibold text-ink-900 mb-2">Community testimonies</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Read experiences from practitioners and clients in Dzaleka and surrounding areas.</p>
-        </a>
-        <div class="bg-white border border-ink-100 rounded-2xl p-8">
-          <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Articles</p>
-          <h3 class="font-semibold text-ink-900 mb-2">More insights coming</h3>
-          <p class="text-sm text-ink-500 leading-relaxed">Further reflections on responsible practice and community wellbeing will be shared here.</p>
+      <div class="space-y-3">
+        <div class="acc-item glass-card rounded-xl overflow-hidden open">
+          <button class="acc-trigger w-full flex items-center justify-between px-5 py-4 text-left">
+            <div class="flex items-center gap-3"><img src="irc_logo.png" alt="" class="w-9 h-9 rounded-full object-cover"><span class="font-semibold text-slate-900 text-sm">01 · Integrative Reflexology Center (IRC)</span></div>
+            <svg class="acc-chevron w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="acc-content open px-5"><p class="text-sm text-slate-600 pb-5 leading-relaxed">Strategic programmatic arm of RA — community services, training, research, women and youth empowerment, outreach and partnerships. Not a separate organisation, but how RA turns vision into action on the ground in Dzaleka.</p></div>
+        </div>
+        <div class="acc-item glass-card rounded-xl overflow-hidden">
+          <button class="acc-trigger w-full flex items-center justify-between px-5 py-4 text-left">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-sky-50 flex items-center justify-center text-sky-600 text-sm font-bold">02</div><span class="font-semibold text-slate-900 text-sm">Community Wellness</span></div>
+            <svg class="acc-chevron w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="acc-content px-5"><p class="text-sm text-slate-600 pb-5 leading-relaxed">Awareness, public sensitisation and supportive wellness activities for refugees and host communities.</p></div>
+        </div>
+        <div class="acc-item glass-card rounded-xl overflow-hidden">
+          <button class="acc-trigger w-full flex items-center justify-between px-5 py-4 text-left">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-sky-50 flex items-center justify-center text-sky-600 text-sm font-bold">03</div><span class="font-semibold text-slate-900 text-sm">Professional Development</span></div>
+            <svg class="acc-chevron w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="acc-content px-5"><p class="text-sm text-slate-600 pb-5 leading-relaxed">Training, capacity building, practitioner support and professional practice standards for therapeutic reflexologists.</p></div>
+        </div>
+        <div class="acc-item glass-card rounded-xl overflow-hidden">
+          <button class="acc-trigger w-full flex items-center justify-between px-5 py-4 text-left">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 text-sm font-bold">04</div><span class="font-semibold text-slate-900 text-sm">Vulnerable Populations</span></div>
+            <svg class="acc-chevron w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="acc-content px-5"><p class="text-sm text-slate-600 pb-5 leading-relaxed">Support for people affected by displacement, poverty, trauma and limited access to care — with dignity and referral pathways.</p></div>
+        </div>
+        <div class="acc-item glass-card rounded-xl overflow-hidden">
+          <button class="acc-trigger w-full flex items-center justify-between px-5 py-4 text-left">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-sky-50 flex items-center justify-center text-sky-600 text-sm font-bold">05</div><span class="font-semibold text-slate-900 text-sm">Partnership & Advocacy</span></div>
+            <svg class="acc-chevron w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="acc-content px-5"><p class="text-sm text-slate-600 pb-5 leading-relaxed">Collaboration with authorities, health professionals, organisations and reflexology networks in Malawi and beyond.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="py-24 md:py-28">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-2xl mb-14">
-        <p class="section-label mb-4">Contact</p>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-950 leading-[1.15] mb-4">Let’s start a conversation.</h2>
-        <p class="text-ink-600 leading-relaxed">Whether you are exploring partnership, seeking information, or have a question — we welcome your message.</p>
-      </div>
-
-      <div class="grid lg:grid-cols-5 gap-14 lg:gap-16">
-        <div class="lg:col-span-3">
-          <form id="contact-form" class="space-y-5">
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label for="first-name" class="block text-sm font-medium text-ink-700 mb-1.5">First name</label>
-                <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Your first name">
-              </div>
-              <div>
-                <label for="last-name" class="block text-sm font-medium text-ink-700 mb-1.5">Last name</label>
-                <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Your last name">
-              </div>
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-ink-700 mb-1.5">Email</label>
-              <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="you@organization.org">
-            </div>
-            <div>
-              <label for="organization" class="block text-sm font-medium text-ink-700 mb-1.5">Organisation <span class="text-ink-400 font-normal">(optional)</span></label>
-              <input type="text" id="organization" name="organization" class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]" placeholder="Organisation or institution">
-            </div>
-            <div>
-              <label for="inquiry-type" class="block text-sm font-medium text-ink-700 mb-1.5">How can we help?</label>
-              <select id="inquiry-type" name="inquiry-type" class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px]">
-                <option value="">Select an option</option>
-                <option value="partnership">Partnership / Collaboration</option>
-                <option value="funding">Funding / Support inquiry</option>
-                <option value="training">Training or professional development</option>
-                <option value="media">Media or information request</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label for="message" class="block text-sm font-medium text-ink-700 mb-1.5">Message</label>
-              <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-ink-200 bg-white text-[15px] resize-y" placeholder="Tell us a bit about your interest or question..."></textarea>
-            </div>
-            <div class="pt-1">
-              <button type="submit" class="btn btn-primary w-full sm:w-auto">Send message</button>
-            </div>
-            <p class="text-sm text-ink-400">We aim to respond within a few business days.</p>
-          </form>
-        </div>
-        <div class="lg:col-span-2 space-y-8">
+  <!-- IRC -->
+  <section id="irc" class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="glass rounded-3xl p-8 md:p-10 border border-slate-200/70">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Email</p>
-            <a href="mailto:reflexologistsassociation@gmail.com" class="text-ra-600 font-medium hover:text-ra-800">reflexologistsassociation@gmail.com</a>
+            <div class="inline-flex px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold mb-3">Strategic programmatic arm</div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">Integrative Reflexology Center</h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-5">The IRC translates RA’s vision into practical initiatives — services, training, evidence and community empowerment in Dzaleka Refugee Camp.</p>
+            <button onclick="openModal('irc-full')" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full">View full concept</button>
           </div>
+          <div class="flex justify-center"><img src="irc_logo.png" alt="IRC" class="w-32 h-32 rounded-full object-cover shadow-xl ring-4 ring-white/50"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories -->
+  <section id="stories" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Impact · Community stories</p>
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">Voices from Dzaleka and surrounding communities</h2>
+        <p class="text-slate-600 text-sm">Summaries below. Full testimonies open in a popup.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row">
+          <img src="photo_mbabazi.jpg" alt="Mbabazi Solange" class="w-full sm:w-36 h-44 sm:h-auto object-cover object-top flex-shrink-0">
+          <div class="p-4 sm:p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider">Practitioner</p>
+            <h3 class="font-semibold text-slate-900">Mbabazi Solange</h3>
+            <p class="text-xs text-slate-500 mb-2">23 · Rwandese · Mother of two</p>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">From trembling hands in training to running a reflexology booth and supporting her children’s school fees.</p>
+            <p class="text-sm text-slate-800 italic mt-2 border-l-2 border-sky-500 pl-3">“My pain became my gift.”</p>
+            <button onclick="openModal('story-mbabazi')" class="mt-2 text-sky-600 text-sm font-semibold text-left">Read full testimony →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row">
+          <img src="photo_nyota.jpg" alt="Nyota Kasongo" class="w-full sm:w-36 h-44 sm:h-auto object-cover object-top flex-shrink-0">
+          <div class="p-4 sm:p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider">Family testimony</p>
+            <h3 class="font-semibold text-slate-900">Nyota Kasongo</h3>
+            <p class="text-xs text-slate-500 mb-2">35 · Congolese · Mother of five</p>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">Her brother Albert recovered after stroke-related complications and later resettled in Canada.</p>
+            <p class="text-sm text-slate-800 italic mt-2 border-l-2 border-sky-500 pl-3">“We consider Mikye as one of our family members.”</p>
+            <button onclick="openModal('story-nyota')" class="mt-2 text-sky-600 text-sm font-semibold text-left">Read full testimony →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row">
+          <img src="photo_grace.jpg" alt="Grace Banda" class="w-full sm:w-36 h-44 sm:h-auto object-cover object-top flex-shrink-0">
+          <div class="p-4 sm:p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider">Host community</p>
+            <h3 class="font-semibold text-slate-900">Grace Banda Raston</h3>
+            <p class="text-xs text-slate-500 mb-2">Malawian · Lilongwe</p>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">Found relief at the Center after limited success elsewhere — serving refugees and Malawians alike.</p>
+            <p class="text-sm text-slate-800 italic mt-2 border-l-2 border-emerald-500 pl-3">“IRC is helping a lot.”</p>
+            <button onclick="openModal('story-grace')" class="mt-2 text-sky-600 text-sm font-semibold text-left">Read full testimony →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row">
+          <img src="photo_jeanclaude.jpg" alt="Jean Claude" class="w-full sm:w-36 h-44 sm:h-auto object-cover object-top flex-shrink-0">
+          <div class="p-4 sm:p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider">Client testimony</p>
+            <h3 class="font-semibold text-slate-900">Bigirimana Jean Claude</h3>
+            <p class="text-xs text-slate-500 mb-2">Burundian · In Malawi since 1994</p>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">After nearly two years of severe spine pain, substantial relief through reflexology within about three weeks.</p>
+            <p class="text-sm text-slate-800 italic mt-2 border-l-2 border-sky-500 pl-3">“That was my amazing relief through reflexology technique.”</p>
+            <button onclick="openModal('story-jeanclaude')" class="mt-2 text-sky-600 text-sm font-semibold text-left">Read full testimony →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row md:col-span-2 max-w-2xl">
+          <img src="photo_samuel.jpg" alt="Samuel Ndayishimiye" class="w-full sm:w-36 h-44 sm:h-auto object-cover object-top flex-shrink-0">
+          <div class="p-4 sm:p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider">Client testimony</p>
+            <h3 class="font-semibold text-slate-900">Samuel Ndayishimiye</h3>
+            <p class="text-xs text-slate-500 mb-2">42 · Burundian · Father of four</p>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">From persistent pain and lost confidence to renewed hope, family life and purpose through care at the Center.</p>
+            <p class="text-sm text-slate-800 italic mt-2 border-l-2 border-sky-500 pl-3">“I came looking for relief, but I found something greater: hope, dignity, and the courage to look toward tomorrow.”</p>
+            <button onclick="openModal('story-samuel')" class="mt-2 text-sky-600 text-sm font-semibold text-left">Read full testimony →</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Our team</p>
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">People behind the practice</h2>
+        <p class="text-slate-600 text-sm">Leadership and staff advancing professional reflexology in Dzaleka and surrounding communities.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_mikye.jpg" alt="Mikye Wa Byondo" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Mikye M. Wa Byondo</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Founder & Coordinator</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_mubenga.jpg" alt="Mubenga Yango" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Mubenga Yango</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Center Manager</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_haiton.jpg" alt="Haiton Lester Thungula" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Haiton Lester Thungula</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Program & Project Manager</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_hamilton.jpg" alt="Hamilton Makhwira" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Hamilton Makhwira</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Secretary</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_zabulonda.jpg" alt="Zabulonda Vivian" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Zabulonda Vivian</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Treasurer</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 text-center">
+          <img src="staff_odette.jpg" alt="Odette Nsimire" class="w-28 h-28 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-sky-50">
+          <h3 class="font-semibold text-slate-900 text-sm">Odette Nsimire</h3>
+          <p class="text-xs text-sky-600 font-medium mt-1">Community Outreach Officer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteer -->
+  <section id="volunteer" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="glass rounded-3xl p-8 md:p-10 border border-slate-200/70">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Telephone</p>
-            <p class="text-ink-700">+265 984 575 479</p>
-            <p class="text-ink-700">+265 990 388 543</p>
+            <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Get involved</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">Volunteer with us</h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">Qualified reflexologists, trainers and partners can contribute skills, mentoring and collaboration through the Integrative Reflexology Center.</p>
+            <ul class="space-y-2 text-sm text-slate-600 mb-5">
+              <li class="flex gap-2"><span class="text-sky-500">•</span> Clinical and training support</li>
+              <li class="flex gap-2"><span class="text-sky-500">•</span> Mentoring for community practitioners</li>
+              <li class="flex gap-2"><span class="text-sky-500">•</span> Knowledge exchange and short placements</li>
+            </ul>
+            <button onclick="openModal('contact')" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full">Express interest</button>
           </div>
-          <div>
-            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Location</p>
-            <p class="text-ink-600 text-sm leading-relaxed">Dzaleka Refugee Camp<br>New Katubza–Ubuntu Road<br>Dowa District, Central Region<br>Malawi</p>
-          </div>
-          <div>
-            <p class="text-xs font-semibold text-ink-400 uppercase tracking-wider mb-2">Postal address</p>
-            <p class="text-ink-600 text-sm leading-relaxed">P.O. Box 16<br>Dowa District<br>Central Region, Malawi</p>
-          </div>
-          <div class="pt-6 border-t border-ink-100">
-            <p class="text-sm text-ink-500 leading-relaxed">RA welcomes collaboration with government authorities, health bodies, humanitarian partners, academic institutions, donors and individual supporters.</p>
+          <div class="rounded-2xl overflow-hidden h-56 md:h-64">
+            <img src="carousel_07.jpg" alt="Graduation ceremony" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-20 bg-ra-800">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-5">Partner with us for healthier communities.</h2>
-      <p class="text-ra-100 mb-8 leading-relaxed">We welcome collaboration with government, health bodies, humanitarian partners, academic institutions and donors who share our commitment.</p>
-      <a href="#contact" class="btn bg-white text-ra-800 hover:bg-ra-50 px-8 py-3.5">Start a conversation</a>
+  <!-- Reports -->
+  <section id="reports" class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-2xl mb-8">
+        <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Reports & documents</p>
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">Transparency for partners and donors</h2>
+        <p class="text-slate-600 text-sm">Key materials available on request. Additional reports will be published as approved.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="glass-card rounded-xl p-5"><h3 class="font-semibold text-slate-900 text-sm">Organisation Factsheet</h3><p class="text-xs text-slate-500 mt-1">Vision, mission, values and objectives</p></div>
+        <div class="glass-card rounded-xl p-5"><h3 class="font-semibold text-slate-900 text-sm">IRC Strategic Concept</h3><p class="text-xs text-slate-500 mt-1">Center positioning and functions</p></div>
+        <div class="glass-card rounded-xl p-5"><h3 class="font-semibold text-slate-900 text-sm">Our Story & Registration</h3><p class="text-xs text-slate-500 mt-1">From HUSID to registered NGO (2025)</p></div>
+        <div class="glass-card rounded-xl p-5"><h3 class="font-semibold text-slate-900 text-sm">Community testimonies</h3><p class="text-xs text-slate-500 mt-1">Impact stories from Dzaleka</p></div>
+      </div>
+      <p class="text-xs text-slate-400 mt-5">Request documents: <a href="mailto:reflexologistsassociation@gmail.com" class="text-sky-600 hover:underline">reflexologistsassociation@gmail.com</a></p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-ink-950 text-ink-400 pt-16 pb-10">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid md:grid-cols-3 gap-12 mb-14">
+  <footer class="bg-slate-900 text-slate-400 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
         <div>
-          <div class="flex items-center gap-2.5 mb-5">
-            <img src="ra_logo_nav.png" alt="" class="h-8 w-8 object-contain brightness-0 invert opacity-90">
-            <span class="text-sm font-semibold text-white tracking-tight">Reflexologists Association</span>
+          <div class="flex items-center gap-2 mb-3">
+            <img src="ra_logo.png" alt="" class="w-8 h-8 rounded-full object-cover">
+            <span class="text-sm font-bold text-white uppercase tracking-wide">Reflexologists Association</span>
           </div>
-          <p class="text-sm leading-relaxed max-w-xs">Promoting responsible reflexology, professional unity and holistic community wellbeing.</p>
-          <p class="text-xs text-ink-500 mt-4"></p>
+          <p class="text-sm leading-relaxed max-w-xs">Professional reflexology, practitioner unity and community wellbeing in Dzaleka Refugee Camp, Malawi.</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-ink-300 uppercase tracking-wider mb-4">On this page</p>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
-            <li><a href="#work" class="hover:text-white transition-colors">Our Work</a></li>
-            <li><a href="#impact" class="hover:text-white transition-colors">Impact</a></li>
-            <li><a href="#insights" class="hover:text-white transition-colors">Insights</a></li>
-            <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+          <p class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">Explore</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#about" class="hover:text-white">About</a></li>
+            <li><a href="#focus" class="hover:text-white">Focus</a></li>
+            <li><a href="#stories" class="hover:text-white">Stories</a></li>
+            <li><a href="#team" class="hover:text-white">Team</a></li>
+            <li><a href="#volunteer" class="hover:text-white">Volunteer</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-xs font-semibold text-ink-300 uppercase tracking-wider mb-4">Contact</p>
-          <ul class="space-y-2.5 text-sm">
+          <p class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">Contact</p>
+          <ul class="space-y-2 text-sm">
             <li>Dzaleka Refugee Camp, Malawi</li>
-            <li><a href="mailto:reflexologistsassociation@gmail.com" class="hover:text-white transition-colors">reflexologistsassociation@gmail.com</a></li>
-            <li>+265 984 575 479</li>
+            <li><a href="mailto:reflexologistsassociation@gmail.com" class="hover:text-white">reflexologistsassociation@gmail.com</a></li>
+            <li>+265 984 575 479 / +265 990 388 543</li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-ink-800 pt-8 flex flex-col sm:flex-row justify-between gap-3 text-xs text-ink-500">
-        <p>© 2026 Reflexologists Association (RA)</p>
-        <p>Registered Trustees · Dzaleka Refugee Camp, Malawi</p>
+      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs">
+        <p>© 2026 Reflexologists Association (RA). All rights reserved.</p>
+        <p>Professional practice · Community wellbeing · Inclusion</p>
       </div>
     </div>
   </footer>
 
-
-  <!-- Full testimony modals -->
-  <div class="modal-overlay" id="modal-mbabazi" role="dialog" aria-modal="true" aria-labelledby="title-mbabazi">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div>
-          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
-          <h3 id="title-mbabazi" class="text-lg font-semibold text-ink-900 tracking-tight">Mbabazi Solange — Journey from Pain to Purpose</h3>
-        </div>
-        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>My name is Mbabazi Solange. I am a 23-year-old refugee and single mother of two children. I am Rwandese by nationality. We arrived in camp in 2002 due to the genocide which took place in Rwanda in 1994, but I was born in Tanzania. We came to Malawi to seek refuge. Upon reaching Malawi, my parents had to work very hard for us to survive. After a few years in the camp we shifted to Lilongwe; my parents were looking for a living. We stayed in Lilongwe for some years and returned to the camp because life became harder. When I got back in the camp I was almost sixteen years old. Many boys were proposing to me; by then I thought I was very beautiful — more than every girl — until I dropped from school.</p>
-        <p>My parents were not concerned about anything, so I thought it was okay. It was too late when I realized that I had ruined my own future. When I got pregnant they chased me from home. I was living with my friend; if I didn’t provide she would shout at me all night long. I shifted; I went to quarantine and begged to be allowed to stay there. I stayed there for almost eight months. In my journey through pregnancy I experienced many aspects of violence, and the men who played with my body did not help me at all after I was kicked out by my parents. From lying on the floor and being beaten by the men I had sex with, my body started to suffer from back pain, sleeplessness, and depression. That is when my mother came and took me back home — but still life was not easy.</p>
-        <p>When I heard about the reflexology training, I joined with little confidence. At the first time, my hands trembled during practice. But with an expert teacher, reflexologist Mr. Mikye Wa Byondo — he never tired of guiding me — slowly I came to find myself and began healing various patients.</p>
-        <p>Today, I run a small reflexology booth. My pain has lessened, my confidence has grown, and I now support my children’s school fees with my earnings. I also encourage other women to join and learn reflexology techniques.</p>
-        <p><em>The Integrative Reflexology Center gave me more than a skill. It gave me hope, healing, future — and “My pain became my gift.”</em></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-nyota" role="dialog" aria-modal="true" aria-labelledby="title-nyota">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div>
-          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
-          <h3 id="title-nyota" class="text-lg font-semibold text-ink-900 tracking-tight">Nyota Kasongo</h3>
-        </div>
-        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Hello fellow friends,</p>
-        <p>My name is Nyota Kasongo; I am 35 years old and mother of 5 children. I am Congolese by nationality, and would come up with my impressive testimony, that I have experienced for the first time in my life, about Reflexology techniques. Since my brother “Albert Kasongo Del” has amazingly got healed within almost a month, after having been affected by an accidental stroke that led to a left hemiplegia and an eye socket swelling, including a blood clot in the brain that have been examined by the two main hospitals here in Malawi: MIM &amp; Kamuzu Central Hospital, that released him and saying that there is no assistance at the local level, unless the UNHCR may get charge of his transfer to get treatment out of Malawi.</p>
-        <p>At the moment in 2021, we did not expect and consent if reflexology could resolve that critical condition of my brother that resulted from an accident when he wanted to separate a couple of people fighting for an unknown reason…</p>
-        <p>His occipital zone has got a shock and frozen the blood in the brain and automatically paralyzed in few days after that accident which has caused a social-familial conflict between two families. However, when we consequently have decided to meet the Reflexologist Mr. Mikye Wa Byondo, a month after the incident period, my brother Albert started getting treatment and got totally healed within a month. And this sorted even out the concerned conflict between 2 families. You can’t believe — the whole family and community were surprised to see my brother recover and start playing football as usual, until he was lucky enough to get resettlement and go to Canada. Many refugees have been amazed by the fact of healing someone who was rejected in such big hospitals, and then getting better without medicine (drugs) but with the miracles of touching, rubbing the soles of the feet and exercises.</p>
-        <p>We consider Mikye as one of our family member in the way he felt free and giving home care to my brother Albert Kasongo. What hurts me about this life of refuge is not being able to pay him anything other than praying if this potential and powerful treatment could sustain and assist more vulnerable in need of support.</p>
-        <p>Thank you</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-grace" role="dialog" aria-modal="true" aria-labelledby="title-grace">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div>
-          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
-          <h3 id="title-grace" class="text-lg font-semibold text-ink-900 tracking-tight">Grace Banda Raston</h3>
-        </div>
-        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>My greetings to all,</p>
-        <p>My name is Grace Banda Raston, I am Malawian. I thank so much since I have got relief. I was suffering from salpingitis for six months in 2020. A certain Mercy Kumwenda living in Area 18 Lilongwe who told me that I should reach at the Integrative Reflexology Center in Dzaleka Refugee Camp whereby she got healed of her kidney failure. When I reached there and met 2 women practicing in the center, called Mrs. Francine Faila Tambwe and Zabulonda Vivian. But I expected to meet with the boy who treated Mrs. Kumwenda. At the end, I have been treated by Madam Francine within two weeks and get healed up to now.</p>
-        <p>What amazes me about our country, after wasting money and going to various hospitals without success, I went to the refugee center, which doesn’t even have a well-built center, and I was treated for only 2 weeks and completely recovered. I concluded that vulnerable communities in Malawi face extreme challenges accessing affordable and effective healthcare. But despite that, I consent this is an important therapy and newer in our country that merit any holistic support to serve more people, not only refugees but also the Malawians. Reflexology is a low-cost, non-invasive therapy that can supplement strained national health systems. It reduces demand on hospitals by helping manage conditions like anxiety, PTSD, hypertension, and all NCDs.</p>
-        <p>Considering that there are many cases that cannot be solved in our regular hospitals, but with these new reflexology techniques, many people are losing their lives and do not know where they can be helped. The existence of this Center in refugee camp and offering such services improves overall community wellness, not just for refugees but also for the host population.</p>
-        <p>Many thanks for this center establishment in the Dzaleka Refugee Camp, and this is my testimony — IRC is helping a lot.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-jeanclaude" role="dialog" aria-modal="true" aria-labelledby="title-jeanclaude">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div>
-          <p class="text-xs font-semibold text-ra-500 uppercase tracking-wider mb-1">Full testimony</p>
-          <h3 id="title-jeanclaude" class="text-lg font-semibold text-ink-900 tracking-tight">Bigirimana Jean Claude</h3>
-        </div>
-        <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Hello Guys,</p>
-        <p>My name is Bigirimana Jean Claude, I am from Burundi. I came here in Malawi since 1994 when the war raged in our country. I continued to experience refugee life as the government and UNHCR organized to serve the refugees. But once upon a time in 2015, I have got a heavy pain in the low spine for almost two years meanwhile I was under medication of injections and pain killers. As I said, life in the camp is not easy and access to money is more difficult than usual. Based on the pain I went through, everything I had was already used up in my treatment for those two years until I was told I had to wait for death at home with no hope of ever returning to my normal state, because pains increased day after day and caused a lumbago that prevented me to walk and leave my home place. Fortunately one of my neighbors who have got relief from his lasting migraine and hemorrhoids told me about foot massage done by a certain Congolese. They directed me to the center he opened here in the camp, but I found myself ill and could not reach the center.</p>
-        <p>On 2017 June, the same neighbors who had witnessed the miracle of Mr. Mikye volunteered to go and call him to assist me. Then after investigating, he decided to assist me and got relief after 3 weeks of treatment without any medication. But the Reflexologist told me that the most affecting key points are “stress and the chemical fertilizer usage for farming” and that is impacting in damaging kidney function until providing such ailments like lumbago and further.</p>
-        <p>That was my amazing relief through Reflexology technique.</p>
-      </div>
-    </div>
+  <div id="modal-root" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
+    <div id="modal-content" class="modal-panel relative bg-white rounded-2xl shadow-2xl w-full max-w-lg modal-enter z-10"></div>
   </div>
 
   <script>
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 24) navbar.classList.add('glass', 'shadow-sm');
+      else navbar.classList.remove('glass', 'shadow-sm');
+    }, { passive: true });
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
+    document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
 
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    document.querySelectorAll('.mobile-nav').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    (function() {
+      const track = document.getElementById('carousel-track');
+      const n = track.children.length;
+      const dots = document.getElementById('carousel-dots');
+      let i = 0;
+      for (let k = 0; k < n; k++) {
+        const b = document.createElement('button');
+        if (k === 0) b.classList.add('active');
+        b.addEventListener('click', () => go(k));
+        dots.appendChild(b);
+      }
+      function go(x) {
+        i = (x + n) % n;
+        track.style.transform = 'translateX(-' + (i * 100) + '%)';
+        [...dots.children].forEach((d, j) => d.classList.toggle('active', j === i));
+      }
+      document.getElementById('carousel-next').onclick = () => go(i + 1);
+      document.getElementById('carousel-prev').onclick = () => go(i - 1);
+      setInterval(() => go(i + 1), 5500);
+    })();
 
-    
-    // Testimony modals
-    document.querySelectorAll('[data-modal]').forEach(btn => {
+    document.getElementById('overview-toggle').addEventListener('click', function() {
+      const el = document.getElementById('overview-extra');
+      const open = el.classList.toggle('expanded');
+      this.textContent = open ? 'Show less ↑' : 'Read more →';
+    });
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const el = document.getElementById(btn.getAttribute('data-modal'));
-        if (!el) return;
-        el.classList.add('is-open');
-        document.body.classList.add('modal-open');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
       });
     });
-    function closeModals() {
-      document.querySelectorAll('.modal-overlay.is-open').forEach(m => m.classList.remove('is-open'));
-      document.body.classList.remove('modal-open');
-    }
-    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeModals));
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModals(); });
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModals(); });
 
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      const original = btn.textContent;
-      btn.textContent = 'Message sent — thank you';
-      btn.disabled = true;
-      setTimeout(() => { btn.textContent = original; btn.disabled = false; e.target.reset(); }, 2800);
+    document.querySelectorAll('.acc-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.acc-item');
+        const content = item.querySelector('.acc-content');
+        const was = item.classList.contains('open');
+        document.querySelectorAll('.acc-item').forEach(i => { i.classList.remove('open'); i.querySelector('.acc-content').classList.remove('open'); });
+        if (!was) { item.classList.add('open'); content.classList.add('open'); }
+      });
     });
+
+    const modalData = {
+      'our-story': {
+        title: 'Our Story',
+        body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">The Dzaleka Refugee Camp and surrounding areas face significant barriers to healthcare. Stress-related illnesses and chronic conditions are widespread due to displacement, trauma and limited access to resources. Reflexology offers a safe, affordable and medication-free complementary approach. Through the Simplified-Energetic Plethora Method (S-EPM), practitioners address critical health concerns such as high blood pressure, kidney-related conditions, stroke support, diabetes-related discomfort, asthma, lumbago, trauma-induced stress and other non-communicable diseases — always alongside, not instead of, conventional care.</p>
+        <p class="text-sm text-slate-600 leading-relaxed mb-3">Rooted in humanitarian service, Reflexologists Association grew from <strong>HUSID</strong> (Humanitarian Service for Integrated Development), a grassroots initiative offering reflexology voluntarily. Over the years RA formalised its structure, trained practitioners and developed the S-EPM model blending traditional healing with modern techniques.</p>
+        <p class="text-sm text-slate-600 leading-relaxed mb-3">After tireless work to establish the organisation and build community understanding, RA was founded in <strong>2022</strong>. It continued under the authorisation of the camp administrator while completing formal registration.</p>
+        <p class="text-sm text-slate-600 leading-relaxed mb-3">On <strong>19 September 2025</strong>, RA was officially registered as an NGO with the Ministry of Justice and Constitutional Affairs under the Trustees Incorporation Act of 1962 (CAP.5:3), Form C. Registration link No. <strong>D6HPJ5R</strong>.</p>
+        <p class="text-sm text-slate-600 leading-relaxed">RA was founded by Malawians and refugees to provide oversight, direction and professional standards for members of the Association.</p>`
+      },
+      'values': { title: 'Core Values', body: `<div class="space-y-3 text-sm"><div><strong class="text-slate-900">Professionalism</strong> — responsible, ethical and competent practice</div><div><strong class="text-slate-900">Compassion</strong> — dignity, empathy and respect</div><div><strong class="text-slate-900">Openness</strong> — learning, dialogue and collaboration</div><div><strong class="text-slate-900">Diversity</strong> — people of different backgrounds and abilities</div><div><strong class="text-slate-900">Inclusion</strong> — vulnerable people are not left behind</div><div><strong class="text-slate-900">Excellence</strong> — exemplary service, learning and engagement</div></div>` },
+      'objectives': { title: 'Strategic Objectives', body: `<ol class="space-y-3 list-none text-sm text-slate-600"><li class="flex gap-2"><span class="font-bold text-sky-600">1</span> Protect and support the professional interests of members and enable practice as therapeutic reflexologists.</li><li class="flex gap-2"><span class="font-bold text-sky-600">2</span> Liaise with the Medical Council and authorities on legislation relating to therapeutic reflexology.</li><li class="flex gap-2"><span class="font-bold text-sky-600">3</span> Encourage recognition and appropriate professional practice in health and community settings.</li><li class="flex gap-2"><span class="font-bold text-sky-600">4</span> Build affiliations and partnerships aligned with RA’s vision in Malawi and beyond.</li></ol>` },
+      'programs': { title: 'Programmatic Focus', body: `<div class="space-y-2 text-sm"><div class="p-3 rounded-xl bg-slate-50"><strong>01 · IRC</strong> — services, training, research, empowerment</div><div class="p-3 rounded-xl bg-slate-50"><strong>02 · Community Wellness</strong></div><div class="p-3 rounded-xl bg-slate-50"><strong>03 · Professional Development</strong></div><div class="p-3 rounded-xl bg-slate-50"><strong>04 · Vulnerable Populations</strong></div><div class="p-3 rounded-xl bg-slate-50"><strong>05 · Partnership & Advocacy</strong></div></div>` },
+      'irc-full': { title: 'Integrative Reflexology Center', body: `<p class="text-xs text-emerald-600 font-semibold uppercase mb-2">Strategic arm of RA</p><p class="text-sm text-slate-600 leading-relaxed mb-3">The Center is not a separate organisation but an integral part of RA. It is the practical platform for reflexology practice, education, research, professional development and community wellbeing.</p><ul class="text-sm text-slate-600 space-y-1.5 mb-3"><li>• Community-based services for vulnerable populations</li><li>• Training and skills development</li><li>• Research and evidence generation</li><li>• Women and youth empowerment</li><li>• Volunteer and international collaboration</li><li>• Outreach and resource mobilisation</li></ul>` },
+      'story-mbabazi': { title: 'Mbabazi Solange', body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">I am a 23-year-old Rwandese refugee and single mother of two. We arrived in camp seeking refuge after the 1994 genocide. After difficult years — including leaving school early and hardship as a young mother — I joined reflexology training with little confidence. My hands trembled at first. Mr. Mikye Wa Byondo never tired of guiding me.</p><p class="text-sm text-slate-600 leading-relaxed mb-3">Today I run a small reflexology booth. My pain has lessened, my confidence has grown, and I support my children’s school fees. I encourage other women to learn.</p><p class="text-sm italic text-slate-800">The Center gave me more than a skill. It gave me hope, healing, future — and my pain became my gift.</p>` },
+      'story-nyota': { title: 'Nyota Kasongo', body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">I am 35, Congolese, mother of five. My brother Albert suffered left hemiplegia and related complications after an accident. Major hospitals indicated limited local options. We turned to Mr. Mikye Wa Byondo. Within about a month Albert recovered enough to play football again and later resettled in Canada.</p><p class="text-sm italic text-slate-800">We consider Mikye as one of our family members for the home care he gave my brother.</p>` },
+      'story-grace': { title: 'Grace Banda Raston', body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">I am Malawian. I suffered from salpingitis for six months in 2020. Directed to the Center in Dzaleka, I was treated by Madam Francine and recovered within about two weeks. The Center serves not only refugees but Malawians. Reflexology is a low-cost complement where health systems are under strain.</p><p class="text-sm italic text-slate-800">IRC is helping a lot.</p>` },
+      'story-jeanclaude': { title: 'Bigirimana Jean Claude', body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">I am from Burundi, in Malawi since 1994. From 2015 I had severe low-spine pain for nearly two years. Resources ran out. Neighbours called Mr. Mikye to treat me at home. After about three weeks of reflexology I got relief without medication.</p><p class="text-sm italic text-slate-800">That was my amazing relief through reflexology technique.</p>` },
+      'story-samuel': { title: 'Samuel Ndayishimiye', body: `<p class="text-sm text-slate-600 leading-relaxed mb-3">I am a 42-year-old Burundian refugee and father of four. Persistent pain affected sleep, movement and confidence. In a refugee community, illness can become a family crisis. Someone told me about the Integrative Reflexology Center. I was uncertain, but sought assessment.</p><p class="text-sm text-slate-600 leading-relaxed mb-3">I was listened to, guided and encouraged. Gradually I noticed changes. The most important change was believing in myself again — family life, work, and hope for the future.</p><p class="text-sm text-slate-600 leading-relaxed mb-3">Reflexology should not replace necessary medical care, but my experience shows why underserved communities seek complementary approaches that support wellbeing.</p><p class="text-sm italic text-slate-800">I came looking for relief, but I found something greater: hope, dignity, and the courage to look toward tomorrow.</p>` },
+      'contact': {
+        title: 'Get in Touch',
+        body: `<div class="space-y-3 mb-5 text-sm"><div><div class="text-xs text-slate-400">Location</div><div class="text-slate-700">Dzaleka Refugee Camp, New Katubza–Ubuntu Road, Dowa District, Malawi</div></div>
+        <div><div class="text-xs text-slate-400">Email</div><a href="mailto:reflexologistsassociation@gmail.com" class="text-sky-600 hover:underline">reflexologistsassociation@gmail.com</a></div>
+        <div><div class="text-xs text-slate-400">Telephone</div><div class="text-slate-700">+265 984 575 479 / +265 990 388 543</div></div>
+        <div><div class="text-xs text-slate-400">Postal</div><div class="text-slate-700">P.O. Box 16, Dowa District, Central Region, Malawi</div></div></div>
+        <form class="space-y-3" onsubmit="event.preventDefault();alert('Thank you. Please email reflexologistsassociation@gmail.com for now.');closeModal();">
+          <input type="text" placeholder="Your name" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40" />
+          <input type="email" placeholder="Email" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40" />
+          <textarea rows="3" placeholder="Message" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40 resize-none"></textarea>
+          <button type="submit" class="w-full btn-primary text-white text-sm font-semibold py-2.5 rounded-xl">Send message</button>
+        </form>`
+      }
+    };
+
+    function openModal(key) {
+      const data = modalData[key];
+      if (!data) return;
+      const root = document.getElementById('modal-root');
+      document.getElementById('modal-content').innerHTML = `
+        <div class="sticky top-0 bg-white/95 backdrop-blur px-5 pt-4 pb-3 border-b border-slate-100 flex items-start justify-between gap-3 rounded-t-2xl z-10">
+          <h3 class="font-bold text-slate-900 text-lg">${data.title}</h3>
+          <button onclick="closeModal()" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 flex-shrink-0" aria-label="Close"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="px-5 py-4">${data.body}</div>`;
+      root.classList.remove('hidden');
+      root.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      const root = document.getElementById('modal-root');
+      root.classList.add('hidden');
+      root.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
