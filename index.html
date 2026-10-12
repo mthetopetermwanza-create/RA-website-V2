@@ -76,6 +76,7 @@
           <a href="#stories" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Stories</a>
           <a href="#team" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Team</a>
           <a href="#volunteer" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Volunteer</a>
+          <a href="#blog" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Blog</a>
           <a href="#reports" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900">Reports</a>
           <button onclick="openModal('contact')" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full">Contact</button>
         </div>
@@ -91,6 +92,7 @@
         <a href="#stories" class="block text-sm font-medium text-slate-700 py-2.5">Stories</a>
         <a href="#team" class="block text-sm font-medium text-slate-700 py-2.5">Team</a>
         <a href="#volunteer" class="block text-sm font-medium text-slate-700 py-2.5">Volunteer</a>
+        <a href="#blog" class="block text-sm font-medium text-slate-700 py-2.5">Blog</a>
         <a href="#reports" class="block text-sm font-medium text-slate-700 py-2.5">Reports</a>
         <button onclick="openModal('contact');document.getElementById('mobile-menu').classList.add('hidden')" class="w-full btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full mt-2">Contact</button>
       </div>
@@ -443,6 +445,47 @@
     </div>
   </section>
 
+
+  <!-- Blog -->
+  <section id="blog" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="text-sky-600 font-semibold text-xs tracking-widest uppercase mb-2">Blog</p>
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">News &amp; updates</h2>
+        <p class="text-slate-600 text-sm">Stories, activities and reflections from Reflexologists Association and the Integrative Reflexology Center in Dzaleka.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col">
+          <img src="carousel_02.jpg" alt="Graduation celebration" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider mb-1">Training</p>
+            <h3 class="font-semibold text-slate-900 text-base mb-2 leading-snug">Graduation of reflexology students</h3>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">Practitioners complete training and step forward to serve their communities with professional, compassionate care.</p>
+            <button type="button" onclick="openModal('blog-graduation')" class="mt-4 text-sky-600 text-sm font-semibold text-left">Read more →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col">
+          <img src="carousel_01.jpg" alt="Community session" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider mb-1">Community</p>
+            <h3 class="font-semibold text-slate-900 text-base mb-2 leading-snug">Care reaching people where they live</h3>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">Sessions in the community bring complementary reflexology support closer to families in Dzaleka and surrounding areas.</p>
+            <button type="button" onclick="openModal('blog-community')" class="mt-4 text-sky-600 text-sm font-semibold text-left">Read more →</button>
+          </div>
+        </article>
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col">
+          <img src="carousel_04.jpg" alt="Integrative Reflexology Center" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-[11px] font-semibold text-sky-600 uppercase tracking-wider mb-1">Organisation</p>
+            <h3 class="font-semibold text-slate-900 text-base mb-2 leading-snug">From grassroots service to registered NGO</h3>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1">How RA grew from HUSID voluntary service to a formal association registered in 2025 — and what that means for partners.</p>
+            <button type="button" onclick="openModal('blog-registration')" class="mt-4 text-sky-600 text-sm font-semibold text-left">Read more →</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Reports -->
   <section id="reports" class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
@@ -480,6 +523,7 @@
             <li><a href="#stories" class="hover:text-white">Stories</a></li>
             <li><a href="#team" class="hover:text-white">Team</a></li>
             <li><a href="#volunteer" class="hover:text-white">Volunteer</a></li>
+            <li><a href="#blog" class="hover:text-white">Blog</a></li>
           </ul>
         </div>
         <div>
@@ -601,6 +645,28 @@
 <p class="text-sm text-slate-700 leading-relaxed mb-3">Today, I share my story because I do not want another person in our community to suffer in silence simply because they believe there is nowhere to turn. The Integrative Reflexology Center gave me a place where I could seek support, learn, and regain hope.</p>
 <p class="text-sm text-slate-700 leading-relaxed mb-3">My journey has taught me something I will never forget: sometimes the first step toward healing is not only finding relief from pain, but finding someone who is willing to listen, guide you, and remind you that your life still has value and purpose.</p>
 <p class="text-sm text-slate-800 italic">“I came looking for relief, but I found something greater: hope, dignity, and the courage to look toward tomorrow.”</p>` },
+
+      'blog-graduation': {
+        title: 'Graduation of reflexology students',
+        body: `<p class="text-xs text-sky-600 font-semibold uppercase tracking-wider mb-2">Training · Dzaleka</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">Graduation ceremonies mark an important milestone for students who complete reflexology training through programmes linked to the Integrative Reflexology Center and partner initiatives in Dzaleka Refugee Camp.</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">Graduates step forward with practical skills to support community wellbeing, using professional, non-invasive complementary care alongside existing health services.</p>
+        <p class="text-sm text-slate-700 leading-relaxed">These moments celebrate hard work, hope and the growth of a professional community rooted in care.</p>`
+      },
+      'blog-community': {
+        title: 'Care reaching people where they live',
+        body: `<p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider mb-2">Community · Outreach</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">Reflexology sessions are not only offered at the Center. Practitioners also meet people in community settings, bringing complementary support closer to families who face barriers to healthcare.</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">This approach reflects RA’s commitment to accessible, professional practice for vulnerable populations in Dzaleka and surrounding areas.</p>
+        <p class="text-sm text-slate-700 leading-relaxed">Community-based care helps more people experience the benefits of responsible reflexology in familiar, dignified settings.</p>`
+      },
+      'blog-registration': {
+        title: 'From grassroots service to registered NGO',
+        body: `<p class="text-xs text-sky-600 font-semibold uppercase tracking-wider mb-2">Organisation</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">Reflexologists Association grew from HUSID (Humanitarian Service for Integrated Development), a grassroots initiative offering Reflexology voluntarily. Over the years, the Association formalized its structure, trained practitioners, and developed the S-EPM Reflexology model.</p>
+        <p class="text-sm text-slate-700 leading-relaxed mb-3">After founding in 2022 and operating under the authorization of the camp administrator, RA was officially registered as an NGO with the Ministry of Justice and Constitutional Affairs on September 19, 2025, under the Trustees Incorporation Act of 1962 (CAP.5:3), Form C. Registration link No. D6HPJ5R.</p>
+        <p class="text-sm text-slate-700 leading-relaxed">This registration strengthens RA’s ability to partner with donors, authorities and communities while upholding professional standards.</p>`
+      },
       'contact': {
         title: 'Get in Touch',
         body: `<div class="space-y-3 mb-5 text-sm"><div><div class="text-xs text-slate-400">Location</div><div class="text-slate-700">Dzaleka Refugee Camp, New Katubza–Ubuntu Road, Dowa District, Malawi</div></div>
